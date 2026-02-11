@@ -1,0 +1,562 @@
+Follow the instructions below for the text and content of the landing page.
+
+{
+  "designSystem": {
+    "brand": {
+      "name": "Landing Pages Studio",
+      "personality": [
+        "cinematic",
+        "confident",
+        "friendly",
+        "premium but approachable",
+        "conversion-focused"
+      ],
+      "tone": [
+        "claro e direto",
+        "sem jargão técnico",
+        "focado em resultado"
+      ]
+    },
+
+    "layout": {
+      "page": {
+        "maxWidth": 1200,
+        "alignment": "center",
+        "gutter": 32,
+        "sectionSpacingY": 96,
+        "sectionPaddingX": 32,
+        "sectionPaddingY": 64,
+        "grid": {
+          "columns": 12,
+          "gap": 24
+        }
+      },
+      "panels": {
+        "cardRadius": 32,
+        "cardPadding": 24,
+        "cardGap": 24,
+        "shadowSoft": "0 24px 60px rgba(0,0,0,0.35)",
+        "shadowSubtle": "0 12px 30px rgba(0,0,0,0.25)"
+      },
+      "hero": {
+        "height": "min(90vh, 760px)",
+        "columns": 2,
+        "contentWidthRatio": 0.5,
+        "imageWidthRatio": 0.5,
+        "alignment": "center",
+        "gap": 48
+      }
+    },
+
+    "colors": {
+      "mode": "dark",
+      "palette": {
+        "background": {
+          "primary": "#050608",
+          "surface": "#12141B",
+          "surfaceSoft": "#1B1E26",
+          "surfaceStrong": "#20242E",
+          "highlightPanel": "#F7E88C", 
+          "mutedPanel": "#EBE8D8"
+        },
+        "text": {
+          "primary": "#FFFFFF",
+          "secondary": "#C5C8D4",
+          "muted": "#8A8FA0",
+          "onHighlight": "#050608"
+        },
+        "accent": {
+          "primary": "#FFEB7A",       // warm yellow, main accent
+          "primarySoft": "#FFF5B3",
+          "primaryStrong": "#F5D647",
+          "secondary": "#FF9A3C",     // warm orange for illustrations / gradients
+          "tertiary": "#4ADE80"       // small success / rating details if needed
+        },
+        "borders": {
+          "subtle": "rgba(255,255,255,0.06)",
+          "strong": "rgba(255,255,255,0.12)"
+        },
+        "states": {
+          "hoverOverlay": "rgba(255,255,255,0.03)",
+          "pressedOverlay": "rgba(0,0,0,0.35)",
+          "focusRing": "0 0 0 2px rgba(255,235,122,0.7)"
+        }
+      }
+    },
+
+    "typography": {
+      "fontFamily": {
+        "primary": "\"Poppins\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+        "secondary": "\"Inter\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+      },
+      "weights": {
+        "regular": 400,
+        "medium": 500,
+        "semibold": 600,
+        "bold": 700
+      },
+      "headings": {
+        "h1": {
+          "fontFamily": "primary",
+          "size": 56,
+          "lineHeight": 1.05,
+          "weight": "bold",
+          "letterSpacing": -0.03,
+          "color": "text.primary"
+        },
+        "h2": {
+          "fontFamily": "primary",
+          "size": 40,
+          "lineHeight": 1.15,
+          "weight": "bold",
+          "letterSpacing": -0.02,
+          "color": "text.primary"
+        },
+        "h3": {
+          "fontFamily": "primary",
+          "size": 24,
+          "lineHeight": 1.25,
+          "weight": "semibold",
+          "letterSpacing": -0.01,
+          "color": "text.primary"
+        },
+        "sectionEyebrow": {
+          "fontFamily": "secondary",
+          "size": 14,
+          "lineHeight": 1.4,
+          "weight": "medium",
+          "transform": "uppercase",
+          "letterSpacing": 0.12,
+          "color": "accent.primarySoft"
+        }
+      },
+      "body": {
+        "base": {
+          "fontFamily": "secondary",
+          "size": 16,
+          "lineHeight": 1.6,
+          "weight": "regular",
+          "color": "text.secondary"
+        },
+        "small": {
+          "fontFamily": "secondary",
+          "size": 14,
+          "lineHeight": 1.5,
+          "weight": "regular",
+          "color": "text.muted"
+        },
+        "helper": {
+          "fontFamily": "secondary",
+          "size": 13,
+          "lineHeight": 1.5,
+          "weight": "regular",
+          "color": "text.muted"
+        },
+        "button": {
+          "fontFamily": "secondary",
+          "size": 15,
+          "lineHeight": 1.2,
+          "weight": "medium",
+          "letterSpacing": 0.04,
+          "transform": "none",
+          "color": "text.onHighlight"
+        }
+      }
+    },
+
+    "radii": {
+      "xs": 6,
+      "sm": 12,
+      "md": 20,
+      "lg": 28,
+      "xl": 40,
+      "pill": 999
+    },
+
+    "effects": {
+      "blurBackground": "backdrop-blur-xl",
+      "cardGlow": "0 0 0 1px rgba(255,255,255,0.06)",
+      "imageGlow": "0 24px 80px rgba(0,0,0,0.7)",
+      "softInnerGrid": {
+        "enabled": true,
+        "opacity": 0.04,
+        "pattern": "rounded-square-wireframe"
+      }
+    },
+
+    "iconsIllustrations": {
+      "style": {
+        "icons": "minimal, filled glyphs with rounded corners",
+        "iconStrokeWidth": 2,
+        "cornerRadius": 999,
+        "backgroundShape": "rounded-rectangle or circle on subtle grid",
+        "colorUsage": "use accent.primary or accent.secondary on dark surfaces",
+        "illustrations": "3D or high-quality render-style characters with warm lighting, playful but premium; use oranges and yellows for main subjects against darker or neutral backgrounds"
+      }
+    },
+
+    "components": {
+      "section": {
+        "default": {
+          "background": "background.primary or background.surface",
+          "paddingY": 96,
+          "paddingX": "page.sectionPaddingX",
+          "contentAlign": "center",
+          "maxWidth": "page.maxWidth"
+        },
+        "highlight": {
+          "background": "background.highlightPanel",
+          "textColor": "text.onHighlight",
+          "shadow": "shadowSoft",
+          "radius": "radii.lg"
+        }
+      },
+
+      "hero": {
+        "background": "background.primary",
+        "layout": "two-column",
+        "columnsRatio": [0.52, 0.48],
+        "content": {
+          "title": {
+            "use": "typography.headings.h1",
+            "maxWidth": 540
+          },
+          "subtitle": {
+            "use": "typography.body.base",
+            "maxWidth": 520
+          },
+          "ctaGroup": {
+            "gap": 16,
+            "alignment": "flex-start"
+          }
+        },
+        "imagePanel": {
+          "shape": "rounded-rectangle",
+          "radius": "radii.xl",
+          "shadow": "imageGlow",
+          "border": "none",
+          "background": "gradient(135deg, #FFB25A 0%, #FFEB7A 40%, #FF9A3C 100%)",
+          "useMockups": true,
+          "mockupStyle": "big carrossel com thumbs arredondadas, levemente em perspectiva"
+        },
+        "decoration": {
+          "leftSideGrid": {
+            "enabled": true,
+            "pattern": "subtle rounded-square outlines aligned in a grid",
+            "opacity": 0.06,
+            "position": "behind hero text"
+          },
+          "bottomWave": {
+            "enabled": true,
+            "style": "thin mono-line wavy shape",
+            "opacity": 0.12
+          }
+        }
+      },
+
+      "buttons": {
+        "primary": {
+          "shape": "pill",
+          "height": 48,
+          "paddingX": 28,
+          "background": "accent.primary",
+          "textColor": "text.onHighlight",
+          "font": "typography.body.button",
+          "shadow": "0 10px 30px rgba(255,235,122,0.35)",
+          "iconPlacement": "right",
+          "hover": {
+            "background": "accent.primaryStrong",
+            "translateY": -1,
+            "shadow": "0 16px 40px rgba(255,235,122,0.45)"
+          },
+          "active": {
+            "background": "accent.primaryStrong",
+            "shadow": "none",
+            "translateY": 0
+          },
+          "focus": {
+            "ring": "states.focusRing"
+          }
+        },
+        "secondary": {
+          "shape": "pill",
+          "height": 46,
+          "paddingX": 24,
+          "background": "transparent",
+          "border": "1px solid borders.subtle",
+          "textColor": "text.primary",
+          "hover": {
+            "background": "states.hoverOverlay",
+            "border": "1px solid borders.strong"
+          }
+        },
+        "ghost": {
+          "shape": "pill",
+          "height": 40,
+          "paddingX": 18,
+          "background": "transparent",
+          "textColor": "text.secondary",
+          "hover": {
+            "background": "states.hoverOverlay"
+          }
+        }
+      },
+
+      "inputs": {
+        "textField": {
+          "height": 52,
+          "paddingX": 20,
+          "radius": "pill",
+          "background": "background.surfaceSoft",
+          "border": "1px solid borders.subtle",
+          "textColor": "text.primary",
+          "placeholderColor": "text.muted",
+          "shadow": "shadowSubtle",
+          "iconPlacement": "right",
+          "hover": {
+            "border": "1px solid borders.strong"
+          },
+          "focus": {
+            "border": "1px solid accent.primary",
+            "ring": "states.focusRing"
+          }
+        }
+      },
+
+      "navigation": {
+        "style": "floating-top-nav",
+        "height": 72,
+        "background": "rgba(5,6,8,0.92)",
+        "backdropBlur": true,
+        "borderBottom": "1px solid rgba(255,255,255,0.04)",
+        "contentWidth": "page.maxWidth",
+        "logoTreatment": {
+          "weight": "bold",
+          "color": "accent.primary",
+          "fontSize": 20,
+          "tracking": -0.02
+        },
+        "links": {
+          "typography": {
+            "size": 15,
+            "weight": "medium",
+            "color": "text.secondary"
+          },
+          "gap": 24,
+          "hover": {
+            "color": "text.primary",
+            "underline": false
+          },
+          "activeIndicator": {
+            "type": "pill-highlight",
+            "background": "background.surfaceSoft",
+            "paddingX": 12,
+            "paddingY": 6,
+            "radius": "pill"
+          }
+        },
+        "ctaAlignment": "right",
+        "ctaVariant": "secondary"
+      },
+
+      "cards": {
+        "base": {
+          "background": "background.surface",
+          "radius": "radii.lg",
+          "padding": 24,
+          "shadow": "shadowSubtle",
+          "border": "1px solid borders.subtle",
+          "hover": {
+            "translateY": -4,
+            "shadow": "shadowSoft",
+            "background": "background.surfaceSoft"
+          }
+        },
+        "portfolioPreview": {
+          "layout": "vertical",
+          "header": {
+            "titleStyle": "typography.headings.h3",
+            "tagStyle": "sectionEyebrow"
+          },
+          "imageRadius": "radii.lg",
+          "imageAspectRatio": "16/10",
+          "useInnerScroll": true,
+          "footer": {
+            "primaryActionVariant": "secondary",
+            "secondaryActionVariant": "ghost",
+            "gap": 12
+          }
+        },
+        "feature": {
+          "iconSize": 48,
+          "iconBackground": "rgba(255,235,122,0.06)",
+          "iconRadius": "pill",
+          "titleStyle": "h3",
+          "descriptionStyle": "body.base",
+          "spacingY": 16
+        },
+        "pricingService": {
+          "background": "background.surfaceSoft",
+          "radius": "radii.lg",
+          "padding": 20,
+          "layout": "horizontal",
+          "labelWeight": "medium",
+          "priceWeight": "semibold",
+          "badgeVariantSelected": {
+            "background": "accent.primarySoft",
+            "textColor": "text.onHighlight"
+          },
+          "hover": {
+            "border": "1px solid accent.primarySoft",
+            "background": "states.hoverOverlay"
+          }
+        }
+      },
+
+      "tabs": {
+        "segmentFilter": {
+          "background": "background.surface",
+          "radius": "pill",
+          "padding": 4,
+          "tab": {
+            "height": 40,
+            "paddingX": 20,
+            "radius": "pill",
+            "font": "body.small",
+            "color": "text.secondary",
+            "active": {
+              "background": "accent.primary",
+              "color": "text.onHighlight",
+              "shadow": "shadowSubtle"
+            },
+            "hover": {
+              "background": "states.hoverOverlay"
+            }
+          }
+        }
+      },
+
+      "carousel": {
+        "heroProjects": {
+          "type": "card-carousel",
+          "visibleCardsDesktop": 1,
+          "thumbnailsBelow": true,
+          "cardRadius": "radii.xl",
+          "cardShadow": "imageGlow",
+          "navigation": {
+            "arrows": {
+              "shape": "circle",
+              "size": 40,
+              "background": "background.surfaceSoft",
+              "iconColor": "text.primary",
+              "hoverBackground": "accent.primary"
+            },
+            "dots": {
+              "size": 8,
+              "inactiveColor": "rgba(255,255,255,0.28)",
+              "activeColor": "accent.primary"
+            }
+          },
+          "interaction": {
+            "drag": true,
+            "scrollSnapping": true,
+            "transition": "300ms ease-out",
+            "hoverScale": 1.02
+          }
+        }
+      },
+
+      "sectionsMapping": {
+        "hero": {
+          "background": "background.primary",
+          "useGridDecoration": true
+        },
+        "whyLucas": {
+          "background": "background.primary",
+          "cardVariant": "feature",
+          "columns": 3
+        },
+        "portfolioInteractive": {
+          "background": "#1C3F3A",
+          "cardVariant": "portfolioPreview"
+        },
+        "aboutProcess": {
+          "background": "background.mutedPanel",
+          "cardVariant": "feature"
+        },
+        "whyLandingPage": {
+          "background": "background.primary"
+        },
+        "serviceBuilder": {
+          "background": "#F7F5EE",
+          "cardVariant": "pricingService",
+          "summaryPanel": {
+            "background": "background.highlightPanel",
+            "textColor": "text.onHighlight",
+            "radius": "radii.lg",
+            "shadow": "shadowSoft"
+          }
+        },
+        "finalCta": {
+          "background": "#1C3F3A",
+          "alignment": "center",
+          "ctaVariant": "primary"
+        },
+        "footer": {
+          "background": "background.primary",
+          "columns": 4,
+          "dividerColor": "borders.subtle"
+        }
+      }
+    },
+
+    "motion": {
+      "defaults": {
+        "durationFast": 150,
+        "durationNormal": 250,
+        "durationSlow": 400,
+        "easingStandard": "cubic-bezier(0.22, 0.61, 0.36, 1)",
+        "easingSpring": "cubic-bezier(0.18, 0.89, 0.32, 1.28)"
+      },
+      "usage": {
+        "hover": "subtle lift, scale 1.02 on cards and images",
+        "transitionsBetweenSections": "fade-up with 16px translate on first appearance",
+        "carousel": "smooth slide with easingStandard",
+        "backgroundDecorations": "very subtle parallax or opacity shifts, nothing distracting"
+      }
+    },
+
+    "principles": {
+      "hierarchy": [
+        "1 primary CTA per seção, com destaque visual claro",
+        "Títulos grandes, frases curtas, textos de apoio mais leves em cinza",
+        "Cards e seções sempre alinhados a um grid visível e espaçado"
+      ],
+      "spacing": [
+        "Usar muito espaço em branco (ou preto) para respirar",
+        "Entre título e subtítulo ~12–16px",
+        "Entre subtítulo e botões ~24px",
+        "Entre cards de uma mesma grade ~24px",
+        "Entre seções principais ~96px"
+      ],
+      "contrast": [
+        "Texto sempre com contraste alto sobre o fundo",
+        "Usar o amarelo apenas como destaque: CTAs, tabs ativas, pequenos detalhes",
+        "Grandes blocos claros (como newsletter / service builder) devem ter textos escuros"
+      ],
+      "consistency": [
+        "Mesma tipografia e pesos para títulos equivalentes em todas as seções",
+        "Mesma linguagem visual de ícones (outline arredondado + preenchimento simples)",
+        "Mesmo estilo de botões (pill) para toda a página"
+      ],
+      "conversionFocus": [
+        "Em toda seção, destacar o próximo passo para o usuário",
+        "Mostrar sempre benefícios concretos, evitando textos genéricos",
+        "Deixar os CTAs principais sempre visíveis em desktop (acima da dobra e ao final das seções longas)"
+      ]
+    }
+  }
+}
+
+
+Use the following design.json as the design system and visual guidelines. Replicate this style as closely as possible across all sections and generated images/videos.
