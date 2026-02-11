@@ -17,22 +17,27 @@ export function Navigation() {
   }, []);
 
   const navLinks = [
-    { name: "Projetos", href: "#projects" },
-    { name: "Serviços", href: "#services" },
+    { name: "Portfólio", href: "#projects" },
     { name: "Sobre", href: "#about" },
-    { name: "Contato", href: "#contact" },
+    { name: "Serviços", href: "#services" },
+    { name: "Orçamento", href: "#calculator" },
   ];
 
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-        scrolled ? "bg-[#050608]/80 backdrop-blur-xl border-white/5 py-4" : "bg-transparent py-6"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled ? "bg-white/90 backdrop-blur-xl border-b border-gray-100 py-4 shadow-sm" : "bg-transparent py-6"
       )}
     >
-      <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-tighter text-white flex items-center gap-2 hover:opacity-90 transition-opacity">
-            <span className="text-primary">Landing</span>Studio
+      <div className="container-custom flex items-center justify-between">
+        <Link href="/">
+          <a className={cn(
+            "text-xl font-bold tracking-tighter flex items-center gap-1 transition-colors",
+            scrolled ? "text-brand-dark" : "text-brand-dark"
+          )}>
+            Lucas<span className="text-brand-accent">Dev</span>
+          </a>
         </Link>
 
         {/* Desktop Nav */}
@@ -41,22 +46,22 @@ export function Navigation() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+              className="text-sm font-medium text-gray-600 hover:text-brand-dark transition-colors"
             >
               {link.name}
             </a>
           ))}
           <Button 
-            variant="default" 
-            className="rounded-full bg-primary text-black hover:bg-primary/90 font-medium px-6"
+            className="rounded-full bg-brand-dark text-white hover:bg-brand-medium font-medium px-6 shadow-lg hover:shadow-xl transition-all"
+            onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Começar Projeto
+            Começar
           </Button>
         </div>
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden text-white"
+          className="md:hidden text-brand-dark"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X /> : <Menu />}
@@ -65,19 +70,25 @@ export function Navigation() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#050608] border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-5 shadow-2xl">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-100 p-6 flex flex-col gap-4 animate-in slide-in-from-top-5 shadow-2xl">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-lg font-medium text-white/70 hover:text-white transition-colors"
+              className="text-lg font-medium text-gray-800 hover:text-brand-dark transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.name}
             </a>
           ))}
-          <Button className="w-full rounded-full bg-primary text-black hover:bg-primary/90 font-medium mt-4">
-            Começar Projeto
+          <Button 
+            className="w-full rounded-full bg-brand-dark text-white hover:bg-brand-medium font-medium mt-4"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Começar
           </Button>
         </div>
       )}

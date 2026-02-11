@@ -4,28 +4,28 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --font-heading: "Poppins", system-ui, sans-serif;
 
-  --color-background: hsl(220 30% 2.5%); /* #050608 */
-  --color-surface: hsl(226 20% 9%); /* #12141B */
-  --color-surface-soft: hsl(223 17% 13%); /* #1B1E26 */
-  --color-surface-strong: hsl(223 18% 15%); /* #20242E */
+  --color-background: #FFFFFF;
+  --color-foreground: #1C3F3A;
   
-  --color-primary: hsl(49 100% 74%); /* #FFEB7A - Warm Yellow */
-  --color-primary-soft: hsl(49 100% 85%); /* #FFF5B3 */
-  --color-primary-strong: hsl(48 90% 62%); /* #F5D647 */
-  
-  --color-secondary: hsl(29 100% 62%); /* #FF9A3C - Orange */
-  
-  --color-text-primary: hsl(0 0% 100%); /* #FFFFFF */
-  --color-text-secondary: hsl(228 15% 80%); /* #C5C8D4 */
-  --color-text-muted: hsl(226 10% 58%); /* #8A8FA0 */
-  --color-text-inverse: hsl(220 30% 2.5%); /* #050608 - On Highlight */
+  /* Brand Colors */
+  --color-brand-dark: #1C3F3A; /* Dark Green */
+  --color-brand-medium: #244A44; /* Slightly lighter green for cards */
+  --color-brand-beige: #EBE8D8; /* Soft Beige */
+  --color-brand-light: #F7F5EE; /* Light Neutral */
+  --color-brand-accent: #D4A373; /* Gold/Bronze accent for buttons if needed, or stick to Green */
 
-  --color-border-subtle: hsl(0 0% 100% / 0.06);
-  --color-border-strong: hsl(0 0% 100% / 0.12);
+  --color-primary: #1C3F3A; 
+  --color-primary-foreground: #FFFFFF;
+  
+  --color-secondary: #EBE8D8;
+  --color-secondary-foreground: #1C3F3A;
 
-  --radius-lg: 1.25rem; /* 20px */
-  --radius-xl: 2rem; /* 32px */
-  --radius-pill: 9999px;
+  --color-muted: #F3F4F6;
+  --color-muted-foreground: #6B7280;
+
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
@@ -42,16 +42,13 @@
 
 @layer base {
   * {
-    border-color: var(--color-border-subtle);
+    border-color: #E5E7EB;
   }
   body {
-    @apply bg-background text-text-primary font-sans antialiased;
-    background-image: 
-      radial-gradient(circle at 15% 50%, rgba(255, 154, 60, 0.03), transparent 25%),
-      radial-gradient(circle at 85% 30%, rgba(255, 235, 122, 0.03), transparent 25%);
+    @apply bg-background text-foreground font-sans antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold text-text-primary tracking-tight;
+    @apply font-heading font-bold text-brand-dark tracking-tight;
   }
 }
 
@@ -60,19 +57,7 @@
     text-wrap: balance;
   }
   
-  .glass-panel {
-    @apply bg-surface/50 backdrop-blur-xl border border-border-subtle;
-  }
-  
-  .glass-nav {
-    @apply bg-[#050608]/90 backdrop-blur-md border-b border-border-subtle;
-  }
-  
-  .text-gradient-gold {
-    @apply bg-clip-text text-transparent bg-linear-to-r from-primary via-primary-soft to-secondary;
-  }
-
-  .hover-lift {
-    @apply transition-transform duration-300 ease-out hover:-translate-y-1;
+  .container-custom {
+    @apply mx-auto px-6 max-w-7xl;
   }
 }

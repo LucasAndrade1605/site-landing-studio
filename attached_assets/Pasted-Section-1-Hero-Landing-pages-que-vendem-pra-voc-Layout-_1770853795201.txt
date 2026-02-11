@@ -1,0 +1,310 @@
+Section 1: Hero – “Landing pages que vendem pra você”
+Layout: 2 colunas
+Background: #FFFFFF
+
+Column 1
+Title h1:
+Landing pages sob medida para transformar cliques em clientes
+
+Subtitle:
+Da estratégia ao design e integrações, eu construo landing pages totalmente focadas em conversão, com entrega rápida e prontas para anunciar hoje mesmo.
+
+Call to action button (primário):
+Quero minha landing page vendedora
+
+Optional helper text (abaixo do botão):
+Sem burocracia: você escolhe o que precisa, vê o valor na hora e recebe um orçamento certeiro pelo WhatsApp.
+
+Column 2
+Image / Component: Carrossel interativo de projetos (mockup)
+
+Componente sugerido:
+Grande mockup de carrossel de cards de landing pages já desenvolvidas.
+
+Cada card contém:
+
+Miniatura / screenshot:
+Preview da landing page (em “iframe” ou sandbox rolável).
+Nome da empresa / projeto:
+Ex.: “Clínica Vida Plena – Captação de Pacientes”
+Botão ou link principal:
+Ver site completo
+Pequeno texto auxiliar:
+Ex.: “Landing page focada em agendamentos via WhatsApp.”
+Interações sugeridas:
+
+Navegação por setas ou bolinhas abaixo dos cards.
+Indicação visual de interação (ex.: texto “Arraste para navegar” ou ícone de mão).
+Dentro de cada card, o usuário pode rolar e interagir com a página (sem sair da sua landing).
+Link “Abrir em nova aba” para acessar o site real, se quiser.
+Section 2: Sobre o Serviço / Why Lucas
+Layout: 1 coluna
+Background: #FFFFFF
+
+Column 1
+Title h2:
+Por que criar sua landing page comigo?
+
+Layout interno: 3 colunas (cards)
+
+Card 1
+Icon: Layout/Monitor
+Title h3:
+Design focado em conversão, não só em “ficar bonito”
+
+Description:
+Eu não entrego só uma página bonita: cada seção é pensada para guiar o visitante até a ação que importa para você (clicar no botão, preencher o formulário, chamar no WhatsApp). Estrutura, hierarquia visual, provas sociais e gatilhos são aplicados de forma estratégica.
+
+Card 2
+Icon: Zap/Timer
+Title h3:
+Entrega rápida e processo simples
+
+Description:
+Você me passa as informações principais do seu negócio, define os serviços que precisa e eu cuido do resto. Em poucos dias sua landing page está pronta para receber tráfego de anúncios, com revisões pontuais para ajustar os detalhes finais.
+
+Card 3
+Icon: Code/Settings
+Title h3:
+Tecnologia leve, integrada e fácil de escalar
+
+Description:
+Landing pages rápidas, responsivas e integradas com ferramentas como WhatsApp, e-mail marketing, formulários, pixel de anúncios e muito mais. Código limpo, boas práticas de performance e uma estrutura preparada para crescer junto com seu negócio.
+
+Section 3: Portfólio Interativo
+(Você pode manter essa seção separada do hero ou unir o conceito. Aqui vai no formato original detalhado.)
+
+Layout: 1 coluna
+Background: #1C3F3A
+
+Column 1 – Card principal
+Title h2:
+Veja na prática algumas landing pages que já desenvolvi
+
+Componente principal (card grande interativo)
+Fundo: tom mais claro que #1C3F3A (ex.: #244A44), cantos arredondados.
+
+Topo do card
+Título interno:
+Navegue pelos projetos e interaja com as páginas
+
+Pequeno texto explicativo:
+Use as setas ou clique nas miniaturas abaixo para trocar de projeto. Role dentro do card para ver a landing page completa e clique em “Abrir site” se quiser ver em nova aba.
+
+Centro do card
+Card grande com preview do site selecionado:
+
+Área principal com preview/iframe simulado da landing page
+(scroll interno vertical).
+Barra superior com:
+Nome do projeto:
+Ex.: “Clínica Vida Plena – Captação de Pacientes”
+Tag de segmento / categoria:
+Ex.: Saúde, Infoproduto, Imobiliária, Lançamento, Captura de Leads, etc.
+Abaixo do preview
+Botão principal:
+Abrir site em nova aba
+Link secundário:
+Ver detalhes do projeto
+(Este link pode abrir um modal com: objetivo, segmento, principais resultados, stack utilizada.)
+
+Abaixo do card principal
+Lista horizontal de miniaturas (thumbnails) de outros projetos:
+
+Mini-screenshots com:
+Nome curto do projeto
+Tag de segmento
+Comportamento:
+
+Hover nas miniaturas: altera o preview no card principal.
+Clique: fixa aquele projeto no card principal.
+Animações sutis na troca (fade/slide).
+Section 4: Sobre a Empresa & Qualidade
+Layout: 2 colunas
+Background: gradiente/textura suave baseado em #EBE8D8
+
+Column 1
+Title h2:
+Processo claro, comunicação direta e foco em resultado
+
+Texto curto opcional:
+Cada landing page é tratada como um projeto estratégico: entendo seu objetivo, analiso seu mercado e estruturo uma página enxuta, clara e orientada à conversão, sem enrolação e com prazos bem definidos.
+
+Column 2 – Cards de benefícios / garantias
+Card 1
+Icon: Check
+Title:
+Briefing objetivo e acompanhamento próximo
+
+Texto curto:
+Você não precisa saber “falar em termos técnicos”. Eu te conduzo com perguntas certas e mantenho você atualizado sobre cada etapa da criação.
+
+Card 2
+Icon: Check
+Title:
+Prazos reais e compromisso com entrega
+
+Texto curto:
+Cronograma enxuto, datas combinadas e transparência: você sabe quando recebe a primeira versão, ajustes e entrega final.
+
+Card 3
+Icon: Check
+Title:
+Boas práticas de performance e SEO on-page
+
+Texto curto:
+Estrutura otimizada para carregamento rápido, tags básicas de SEO, headings organizados e versão perfeita para mobile.
+
+Card 4
+Icon: Check
+Title:
+Suporte pós-entrega e ajustes pontuais
+
+Texto curto:
+Após a entrega, você conta com um período de suporte para ajustes finos, correções e pequenas melhorias na landing page.
+
+Section 5: Por que ter uma landing page?
+(Nova sessão que você pediu: explicando por que é bom ter uma landing page.)
+
+Layout: 1 coluna
+Background: #FFFFFF
+
+Title h2:
+Por que sua oferta merece uma landing page própria?
+
+Texto (pode ser em parágrafos ou bullets):
+
+Foco total na conversão:
+Diferente de um site institucional cheio de menus e distrações, a landing page tem um único objetivo: fazer o visitante tomar uma ação específica (comprar, agendar, baixar, se cadastrar ou chamar no WhatsApp).
+
+Mais resultado com o mesmo investimento em anúncios:
+Quando o tráfego é enviado para uma página pensada estrategicamente, a taxa de conversão aumenta e o custo por lead/venda tende a cair.
+
+Mensagem clara e direta para o público certo:
+A landing page fala de uma oferta específica para um público específico, com uma narrativa simples, prova social e chamadas bem posicionadas.
+
+Teste, otimização e escala:
+Com uma estrutura organizada, fica muito mais fácil testar novos textos, imagens, cores e elementos sem bagunçar o site inteiro.
+
+Perfeita para campanhas, lançamentos e serviços principais:
+Ideal para campanhas de tráfego pago, páginas de captura de leads, lançamento de produtos/serviços, eventos, mentorias, cursos e muito mais.
+
+Section 6: Montador de Serviços & Valores Médios
+Layout: 1 coluna
+Background: tom claro neutro (ex.: #F7F5EE)
+
+Title h2:
+Monte sua landing page e veja o valor estimado em tempo real
+
+Descrição curta:
+Selecione abaixo os serviços que você precisa. O valor total será atualizado automaticamente e enviado para meu WhatsApp com todos os detalhes, para você receber um orçamento certeiro, sem surpresas.
+
+Lista de serviços (exemplo com valores médios)
+(Os valores são apenas exemplos. Ajuste para sua realidade.)
+
+Cada item pode ser um “card com checkbox + descrição + valor”:
+
+Copywriting estratégico da landing page – R$ 600,00
+
+Estrutura completa da oferta
+Títulos, subtítulos, argumentos, chamadas para ação
+Foco em conversão, tom de voz alinhado ao seu público
+Design profissional da landing page (UI/UX) – R$ 800,00
+
+Layout responsivo (desktop + mobile)
+Identidade visual alinhada à sua marca
+Hierarquia visual pensada para conversão
+Desenvolvimento / Implementação da landing page – R$ 900,00
+
+Construção em plataforma escolhida (ex.: Webflow, WordPress, etc.)
+Otimização de performance e responsividade
+Configuração básica de SEO on-page
+Integrações essenciais – R$ 300,00
+
+WhatsApp, formulários, pixel (Meta/Google), ferramentas de e-mail marketing
+Testes básicos de funcionamento
+Configuração de domínio e hospedagem (opcional) – R$ 250,00
+
+Conexão de domínio
+Configuração SSL (quando aplicável)
+Orientação sobre provedores de hospedagem
+Suporte e ajustes pós-lançamento (até 15 dias) – R$ 200,00
+
+Pequenos ajustes de texto e layout
+Correções pontuais e melhorias leves
+Resumo Dinâmico
+Bloco de resultado (fixo no final da sessão ou lateral):
+
+Título:
+Seu pacote de landing page
+
+Lista do que foi selecionado:
+Ex.:
+
+Copywriting estratégico ✅
+Design profissional ✅
+Integrações essenciais ✅
+Total estimado:
+R$ [VALOR TOTAL DINÂMICO]
+
+Texto de apoio:
+Este é um valor médio estimado. Ao enviar para meu WhatsApp, analiso seu caso específico e retorno com um orçamento preciso e alinhado ao seu projeto.
+
+Botão para WhatsApp
+Call to Action (botão):
+Enviar meu pacote para o WhatsApp
+
+Comportamento sugerido:
+
+Ao clicar, abrir link do WhatsApp com mensagem pré-montada contendo:
+Lista dos serviços selecionados
+Valor total estimado
+Nome da pessoa (se tiver capturado no formulário)
+Exemplo de mensagem automática (estrutura, não texto fixo):
+“Olá, Lucas! Montei meu pacote de landing page com estes serviços: [lista].
+Valor estimado total: R$ [valor].
+Gostaria de um orçamento certeiro para esse pacote.”
+
+Section 7: Call To Action Final
+Layout: 1 coluna
+Background: #1C3F3A
+
+Column 1
+Title h2:
+Pronto para ter uma landing page que realmente vende?
+
+Description (bullets):
+
+✓ Página focada 100% em conversão
+✓ Processo simples, comunicação clara e entrega rápida
+✓ Serviços flexíveis: você escolhe o que precisa e vê o valor na hora
+Call To Action (botão):
+Montar agora minha landing page
+
+Linha de apoio (opcional):
+Sem compromisso: você monta o pacote, recebe o valor estimado e fala comigo direto no WhatsApp.
+
+Section 8: Footer
+Conteúdo do rodapé:
+
+Logo
+[Logo reduzida / Nome da marca]
+Ex.: Lucas Dev Landing Pages
+Website sections (links de navegação):
+[Início]
+[Portfólio]
+[Sobre]
+[Serviços]
+[Contato]
+(Cada um pode ancorar para a própria seção da one-page.)
+
+Informações de contato:
+Telefone / WhatsApp:
+[SEU NÚMERO PRINCIPAL]
+E-mail profissional (opcional):
+[SEU E-MAIL PROFISSIONAL]
+Links legais:
+[Política de Privacidade]
+[Termos e Condições]
+Copy final:
+© {ano atual} [Lucas Dev Landing Pages]. Todos os direitos reservados.
