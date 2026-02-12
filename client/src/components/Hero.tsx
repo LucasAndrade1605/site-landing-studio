@@ -1,145 +1,101 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-
-const carouselItems = [
-  {
-    id: 1,
-    title: "Clínica Vida Plena – Captação de Pacientes",
-    description: "Landing page focada em agendamentos via WhatsApp.",
-    image: "/images/mockup-clinic.png",
-    link: "#"
-  },
-  {
-    id: 2,
-    title: "LaunchMaster - Venda de Curso",
-    description: "Página de alta conversão para lançamentos de infoprodutos.",
-    image: "/images/mockup-course.png",
-    link: "#"
-  },
-  {
-    id: 3,
-    title: "Elite Estates - Imóveis de Luxo",
-    description: "Design premium para captação de leads qualificados.",
-    image: "/images/mockup-realestate.png",
-    link: "#"
-  }
-];
+import { ArrowRight, Play } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function Hero() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % carouselItems.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
-  };
-
   return (
-    <section className="bg-white py-20 lg:py-32 overflow-hidden">
-      <div className="container-custom grid lg:grid-cols-2 gap-16 items-center">
-        {/* Column 1: Text Content */}
-        <div className="space-y-8 relative z-10">
+    <section className="relative min-h-[90vh] flex items-center pt-32 pb-20 overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-secondary/10 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="container mx-auto px-6 max-w-7xl grid lg:grid-cols-2 gap-12 items-center">
+        <div className="space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-5xl lg:text-6xl font-bold leading-[1.1] text-brand-dark mb-6">
-              Landing pages sob medida para transformar cliques em clientes
+            <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary text-sm font-medium tracking-wide mb-6">
+              LANDING PAGES DE ALTA CONVERSÃO
+            </span>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white">
+              Design que <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">vende</span> sua visão.
             </h1>
-            <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
-              Da estratégia ao design e integrações, eu construo landing pages totalmente focadas em conversão, com entrega rápida e prontas para anunciar hoje mesmo.
-            </p>
           </motion.div>
+          
+          <motion.p 
+            className="text-lg text-white/60 max-w-xl leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            Transformamos visitantes em clientes com landing pages cinematográficas, 
+            estratégicas e desenvolvidas para performance máxima.
+          </motion.p>
 
-          <motion.div
+          <motion.div 
+            className="flex flex-wrap gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="space-y-4"
           >
-            <Button 
-              className="h-14 px-8 rounded-full bg-brand-dark text-white hover:bg-brand-medium text-lg font-semibold shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
-            >
-              Quero minha landing page vendedora
+            <Button className="h-14 px-8 rounded-full bg-primary text-black hover:bg-primary/90 text-base font-semibold shadow-[0_0_20px_rgba(255,235,122,0.3)] hover:shadow-[0_0_30px_rgba(255,235,122,0.5)] transition-all">
+              Iniciar Projeto <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
-            <p className="text-sm text-gray-500 max-w-md">
-              Sem burocracia: você escolhe o que precisa, vê o valor na hora e recebe um orçamento certeiro pelo WhatsApp.
-            </p>
+            <Button variant="outline" className="h-14 px-8 rounded-full border-white/10 text-white hover:bg-white/5 hover:text-white hover:border-white/20 text-base font-medium backdrop-blur-sm">
+              <Play className="mr-2 w-4 h-4 fill-current" /> Ver Showreel
+            </Button>
+          </motion.div>
+
+          <motion.div 
+            className="pt-8 flex items-center gap-8 text-white/40 text-sm font-medium"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <span>TRUSTED BY 50+ BRANDS</span>
+            <div className="h-px flex-1 bg-white/10" />
           </motion.div>
         </div>
 
-        {/* Column 2: Carousel Component */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
+        <motion.div 
+          className="relative lg:h-[600px] flex items-center justify-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7 }}
-          className="relative"
         >
-          <div className="relative bg-gray-50 rounded-[2rem] p-4 shadow-2xl border border-gray-100">
-            <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-white shadow-inner">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentIndex}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute inset-0"
-                >
-                  <img 
-                    src={carouselItems[currentIndex].image} 
-                    alt={carouselItems[currentIndex].title}
-                    className="w-full h-full object-cover object-top"
-                  />
-                  
-                  {/* Card Overlay Info */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-100 p-6 flex items-center justify-between">
-                    <div>
-                      <h3 className="font-bold text-brand-dark">{carouselItems[currentIndex].title}</h3>
-                      <p className="text-sm text-gray-500 mt-1">{carouselItems[currentIndex].description}</p>
-                    </div>
-                    <Button size="icon" variant="ghost" className="rounded-full hover:bg-gray-100">
-                      <ExternalLink className="w-5 h-5 text-brand-dark" />
-                    </Button>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+          <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-auto lg:h-full">
+            <img 
+              src="/images/hero-3d.png" 
+              alt="3D Interface Landing Page" 
+              className="w-full h-full object-contain drop-shadow-2xl animate-float"
+            />
+            
+            {/* Floating Badge 1 */}
+            <div className="absolute top-[20%] right-[10%] bg-[#12141B]/80 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-xl flex items-center gap-3 animate-float-delayed">
+              <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 font-bold">
+                %
+              </div>
+              <div>
+                <div className="text-xs text-white/50">Taxa de Conversão</div>
+                <div className="text-lg font-bold text-white">+124%</div>
+              </div>
             </div>
 
-            {/* Navigation Controls */}
-            <div className="flex justify-between items-center mt-6 px-2">
-               <div className="flex gap-2">
-                 {carouselItems.map((_, idx) => (
-                   <button
-                     key={idx}
-                     onClick={() => setCurrentIndex(idx)}
-                     className={`w-2.5 h-2.5 rounded-full transition-colors ${idx === currentIndex ? 'bg-brand-dark' : 'bg-gray-300'}`}
-                   />
-                 ))}
-               </div>
-               <div className="flex gap-2">
-                 <Button onClick={prevSlide} size="icon" variant="outline" className="rounded-full w-10 h-10 border-gray-200">
-                   <ChevronLeft className="w-5 h-5" />
-                 </Button>
-                 <Button onClick={nextSlide} size="icon" variant="outline" className="rounded-full w-10 h-10 border-gray-200">
-                   <ChevronRight className="w-5 h-5" />
-                 </Button>
-               </div>
-            </div>
-            
-            <div className="absolute -bottom-10 left-0 right-0 text-center text-sm text-gray-400 flex items-center justify-center gap-2">
-               <span className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-pulse"/>
-               Arraste ou use as setas para navegar
+            {/* Floating Badge 2 */}
+            <div className="absolute bottom-[20%] left-[5%] bg-[#12141B]/80 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-xl flex items-center gap-3 animate-float">
+              <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+                ★
+              </div>
+              <div>
+                <div className="text-xs text-white/50">Satisfação</div>
+                <div className="text-lg font-bold text-white">5.0/5.0</div>
+              </div>
             </div>
           </div>
-          
-          {/* Decorative Elements */}
-          <div className="absolute -z-10 top-[-20px] right-[-20px] w-full h-full rounded-[2.5rem] bg-brand-beige/50" />
         </motion.div>
       </div>
     </section>
