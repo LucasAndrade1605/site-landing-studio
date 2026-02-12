@@ -4,24 +4,27 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --font-heading: "Poppins", system-ui, sans-serif;
 
-  /* Brand Colors - Dark Green Theme */
-  --color-background: #1C3F3A; /* Dark Green */
-  --color-surface: #244A44; /* Slightly lighter green for cards */
-  --color-surface-hover: #2D5C54;
+  --color-background: hsl(220 30% 2.5%); /* #050608 */
+  --color-surface: hsl(226 20% 9%); /* #12141B */
+  --color-surface-soft: hsl(223 17% 13%); /* #1B1E26 */
+  --color-surface-strong: hsl(223 18% 15%); /* #20242E */
   
-  --color-primary: #EBE8D8; /* Beige Accent */
-  --color-primary-foreground: #1C3F3A;
+  --color-primary: hsl(49 100% 74%); /* #FFEB7A - Warm Yellow */
+  --color-primary-soft: hsl(49 100% 85%); /* #FFF5B3 */
+  --color-primary-strong: hsl(48 90% 62%); /* #F5D647 */
   
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #EBE8D8; /* Beige for secondary text */
-  --color-text-muted: rgba(255, 255, 255, 0.6);
+  --color-secondary: hsl(29 100% 62%); /* #FF9A3C - Orange */
   
-  --color-border-subtle: rgba(255, 255, 255, 0.1);
-  --color-border-strong: rgba(255, 255, 255, 0.2);
+  --color-text-primary: hsl(0 0% 100%); /* #FFFFFF */
+  --color-text-secondary: hsl(228 15% 80%); /* #C5C8D4 */
+  --color-text-muted: hsl(226 10% 58%); /* #8A8FA0 */
+  --color-text-inverse: hsl(220 30% 2.5%); /* #050608 - On Highlight */
+
+  --color-border-subtle: hsl(0 0% 100% / 0.06);
+  --color-border-strong: hsl(0 0% 100% / 0.12);
 
   --radius-lg: 1.25rem; /* 20px */
   --radius-xl: 2rem; /* 32px */
-  --radius-2xl: 2.5rem; /* 40px */
   --radius-pill: 9999px;
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
@@ -43,6 +46,9 @@
   }
   body {
     @apply bg-background text-text-primary font-sans antialiased;
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(255, 154, 60, 0.03), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(255, 235, 122, 0.03), transparent 25%);
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-bold text-text-primary tracking-tight;
@@ -58,6 +64,14 @@
     @apply bg-surface/50 backdrop-blur-xl border border-border-subtle;
   }
   
+  .glass-nav {
+    @apply bg-[#050608]/90 backdrop-blur-md border-b border-border-subtle;
+  }
+  
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-linear-to-r from-primary via-primary-soft to-secondary;
+  }
+
   .hover-lift {
     @apply transition-transform duration-300 ease-out hover:-translate-y-1;
   }
