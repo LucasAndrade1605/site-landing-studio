@@ -1,42 +1,131 @@
 @import "tailwindcss";
 
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+  }
+}
+
+/* Adicione ao seu arquivo CSS global ou ao componente */
+
+@keyframes float-3d {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotateX(2deg) rotateY(-2deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotateX(-2deg) rotateY(2deg);
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 20px rgba(255, 235, 122, 0.3));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 40px rgba(255, 235, 122, 0.6));
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Classes para aplicar */
+.animate-float-3d {
+  animation: float-3d 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+
 @theme {
   --font-sans: "Inter", system-ui, sans-serif;
   --font-heading: "Poppins", system-ui, sans-serif;
 
-  --color-background: hsl(220 30% 2.5%); /* #050608 */
-  --color-surface: hsl(226 20% 9%); /* #12141B */
-  --color-surface-soft: hsl(223 17% 13%); /* #1B1E26 */
-  --color-surface-strong: hsl(223 18% 15%); /* #20242E */
-  
-  --color-primary: hsl(49 100% 74%); /* #FFEB7A - Warm Yellow */
-  --color-primary-soft: hsl(49 100% 85%); /* #FFF5B3 */
-  --color-primary-strong: hsl(48 90% 62%); /* #F5D647 */
-  
-  --color-secondary: hsl(29 100% 62%); /* #FF9A3C - Orange */
-  
-  --color-text-primary: hsl(0 0% 100%); /* #FFFFFF */
-  --color-text-secondary: hsl(228 15% 80%); /* #C5C8D4 */
-  --color-text-muted: hsl(226 10% 58%); /* #8A8FA0 */
-  --color-text-inverse: hsl(220 30% 2.5%); /* #050608 - On Highlight */
+  --color-background: hsl(220 30% 2.5%);
+  /* #050608 */
+  --color-surface: hsl(226 20% 9%);
+  /* #12141B */
+  --color-surface-soft: hsl(223 17% 13%);
+  /* #1B1E26 */
+  --color-surface-strong: hsl(223 18% 15%);
+  /* #20242E */
+
+  --color-primary: hsl(49 100% 74%);
+  /* #FFEB7A - Warm Yellow */
+  --color-primary-soft: hsl(49 100% 85%);
+  /* #FFF5B3 */
+  --color-primary-strong: hsl(48 90% 62%);
+  /* #F5D647 */
+
+  --color-secondary: hsl(29 100% 62%);
+  /* #FF9A3C - Orange */
+
+  --color-text-primary: hsl(0 0% 100%);
+  /* #FFFFFF */
+  --color-text-secondary: hsl(228 15% 80%);
+  /* #C5C8D4 */
+  --color-text-muted: hsl(226 10% 58%);
+  /* #8A8FA0 */
+  --color-text-inverse: hsl(220 30% 2.5%);
+  /* #050608 - On Highlight */
 
   --color-border-subtle: hsl(0 0% 100% / 0.06);
   --color-border-strong: hsl(0 0% 100% / 0.12);
 
-  --radius-lg: 1.25rem; /* 20px */
-  --radius-xl: 2rem; /* 32px */
+  --radius-lg: 1.25rem;
+  /* 20px */
+  --radius-xl: 2rem;
+  /* 32px */
   --radius-pill: 9999px;
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
   @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    from {
+      height: 0;
+    }
+
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
+
   @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+
+    to {
+      height: 0;
+    }
   }
 }
 
@@ -44,13 +133,20 @@
   * {
     border-color: var(--color-border-subtle);
   }
+
   body {
     @apply bg-background text-text-primary font-sans antialiased;
-    background-image: 
+    background-image:
       radial-gradient(circle at 15% 50%, rgba(255, 154, 60, 0.03), transparent 25%),
       radial-gradient(circle at 85% 30%, rgba(255, 235, 122, 0.03), transparent 25%);
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-heading font-bold text-text-primary tracking-tight;
   }
 }
@@ -59,15 +155,15 @@
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .glass-panel {
     @apply bg-surface/50 backdrop-blur-xl border border-border-subtle;
   }
-  
+
   .glass-nav {
     @apply bg-[#050608]/90 backdrop-blur-md border-b border-border-subtle;
   }
-  
+
   .text-gradient-gold {
     @apply bg-clip-text text-transparent bg-linear-to-r from-primary via-primary-soft to-secondary;
   }

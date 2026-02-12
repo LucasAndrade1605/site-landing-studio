@@ -1,158 +1,163 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
-const portfolioItems = [
+const projects = [
   {
     id: 1,
-    title: "SaaS Analytics Pro",
-    category: "Software B2B",
-    image: "/images/mockup-saas.png",
-    description: "Landing page para software B2B com demonstração interativa e tabela de preços.",
-    stack: ["Vue", "Chart.js", "HubSpot"]
+    title: "Pontual Informática",
+    category: "Automação de bares e restaurantes e Serviços de TI",
+    url: "https://pontualinformatica.net.br",
+    tags: ["Vue", "Chart.js", "HubSpot"],
+    thumbnail: "/images/pagina-pontual.png",
   },
   {
     id: 2,
-    title: "Clínica Vida Plena – Captação de Pacientes",
-    category: "Saúde",
-    image: "/images/mockup-clinic.png",
-    description: "Landing page focada em conversão para agendamentos via WhatsApp e formulário.",
-    stack: ["React", "Tailwind", "WhatsApp API"]
+    title: "E.S.A Certificados",
+    category: "Emissão de certificados digitais",
+    url: "https://esacertificadora.com.br",
+    tags: ["React", "Next.js", "Tailwind"],
+    thumbnail: "/images/pagina-esa-certificados.png",
   },
   {
     id: 3,
     title: "LaunchMaster - Venda de Curso",
     category: "Infoproduto",
-    image: "/images/mockup-course.png",
-    description: "Página de vendas para lançamento de curso online com integração de checkout.",
-    stack: ["Next.js", "Stripe", "Framer Motion"]
+    url: "https://exemplo-curso.com",
+    tags: ["WordPress", "WooCommerce"],
+    thumbnail: "/images/project-3-thumb.png",
   },
-  {
-    id: 4,
-    title: "Elite Estates - Imóveis de Luxo",
-    category: "Imobiliária",
-    image: "/images/mockup-realestate.png",
-    description: "Vitrine de imóveis de alto padrão com galeria interativa e tour virtual.",
-    stack: ["React", "Leaflet", "Gallery API"]
-  }
 ];
 
 export function Portfolio() {
-  const [activeProject, setActiveProject] = useState(portfolioItems[0]);
+  const [selectedProject, setSelectedProject] = useState(projects[0]);
 
   return (
-    <section id="projects" className="py-24 bg-[#1C3F3A] text-white">
+    <section id="projects" className="py-32 bg-[#050608]">
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="mb-12 text-center md:text-left">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
-            Veja na prática algumas landing pages que já desenvolvi
+        {/* Header */}
+        <div className="mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <span className="text-primary">Explore</span>,
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+              {" "}
+              na prática
+            </span>
+            , as landing pages que desenvolvemos{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+              sob medida
+            </span>{" "}
+            para nossos clientes.
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-8">
-          {/* Main Card - Left Side (8 cols) */}
-          <div className="lg:col-span-8 order-1 lg:order-none">
-            <motion.div 
-              layoutId="main-card"
-              className="bg-[#244A44] rounded-[2.5rem] p-8 h-full flex flex-col relative overflow-hidden shadow-xl border border-white/5"
-            >
-              {/* Header inside card */}
-              <div className="flex justify-between items-start mb-6">
-                 <div>
-                   <p className="text-white/40 text-[10px] font-bold uppercase tracking-widest mb-1.5 font-heading">
-                     NAVEGUE PELOS PROJETOS
-                   </p>
-                   <h3 className="text-3xl font-bold text-white tracking-tight">
-                     {activeProject.title}
-                   </h3>
-                 </div>
-                 <div className="px-4 py-1.5 rounded-full bg-[#1C3F3A]/50 border border-white/10 text-xs font-medium text-white/90 backdrop-blur-sm h-fit">
-                   {activeProject.category}
-                 </div>
+        <div className="grid lg:grid-cols-[1fr_400px] gap-8">
+          {/* Main Project Display - Left Side */}
+          <motion.div
+            key={selectedProject.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="relative"
+          >
+            {/* Navigation Header */}
+            <div className="mb-6 flex items-center justify-between">
+              <div>
+                <span className="text-white/50 text-sm uppercase tracking-widest block mb-2">
+                  Navegue pelos projetos
+                </span>
+                <h3 className="text-3xl font-bold text-white">
+                  {selectedProject.title}
+                </h3>
+              </div>
+              <span className="text-white/70 text-sm">
+                {selectedProject.category}
+              </span>
+            </div>
+
+            {/* Live Website Preview */}
+            <div className="relative aspect-[16/10] rounded-[2rem] overflow-hidden bg-[#12141B] border border-white/10 mb-6">
+              <iframe
+                src={selectedProject.url}
+                className="w-full h-full"
+                title={selectedProject.title}
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Tags and Actions */}
+            <div className="flex items-center justify-between">
+              <div className="flex gap-3">
+                {selectedProject.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
 
-              {/* Browser Window / Image Container */}
-              <div className="flex-1 bg-[#1C3F3A] rounded-2xl overflow-hidden relative group min-h-[300px] md:min-h-[420px] shadow-inner border border-white/5">
-                <AnimatePresence mode="wait">
-                  <motion.img 
-                    key={activeProject.id}
-                    src={activeProject.image}
-                    alt={activeProject.title}
-                    initial={{ opacity: 0, scale: 1.02 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full h-full object-cover object-top absolute inset-0"
-                  />
-                </AnimatePresence>
-                
-                {/* Hover overlay hint */}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex items-center justify-center">
-                  <div className="bg-black/40 backdrop-blur-md px-4 py-2 rounded-full text-sm font-medium text-white">
-                    Preview do Projeto
+              <div className="flex gap-3">
+                <Button
+                  asChild
+                  className="rounded-full bg-primary hover:bg-primary/90 text-black px-6 gap-2"
+                >
+                  <a
+                    href={selectedProject.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Abrir site
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Project List - Right Side with Hidden Scrollbar */}
+          <div className="max-h-[800px] overflow-y-auto space-y-4 scrollbar-hide">
+            {projects.map((project, idx) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                onClick={() => setSelectedProject(project)}
+                className={`
+                  group cursor-pointer rounded-2xl p-4 transition-all duration-300
+                  ${
+                    selectedProject.id === project.id
+                      ? "bg-white/10 border-2 border-primary"
+                      : "bg-white/5 border border-white/10 hover:bg-white/10"
+                  }
+                `}
+              >
+                <div className="flex flex-col gap-3">
+                  {/* Thumbnail */}
+                  <div className="w-full aspect-video rounded-xl overflow-hidden bg-[#12141B]">
+                    <img
+                      src={project.thumbnail}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Info */}
+                  <div>
+                    <h4 className="text-white font-semibold text-base mb-1">
+                      {project.title}
+                    </h4>
+                    <span className="text-white/50 text-sm">
+                      {project.category}
+                    </span>
                   </div>
                 </div>
-              </div>
-
-              {/* Footer Actions inside card */}
-              <div className="mt-6 flex flex-col md:flex-row gap-4 items-center justify-between">
-                <div className="flex flex-wrap gap-2 w-full md:w-auto">
-                  {activeProject.stack.map(tech => (
-                    <span key={tech} className="px-3 py-1.5 rounded-lg bg-[#1C3F3A]/60 text-xs font-medium text-white/60 border border-white/5">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
-                   <button className="text-sm font-semibold text-white/80 hover:text-white transition-colors">
-                     Ver detalhes
-                   </button>
-                   <Button className="h-10 px-5 rounded-lg bg-[#EBE8D8] text-[#1C3F3A] hover:bg-white font-semibold flex items-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(235,232,216,0.2)]">
-                     Abrir site <ArrowUpRight className="w-4 h-4" />
-                   </Button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Thumbnails Sidebar - Right Side (4 cols) */}
-          <div className="lg:col-span-4 flex flex-col gap-3 order-2 lg:order-none">
-            {portfolioItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveProject(item)}
-                className={`w-full p-3 rounded-[1.25rem] cursor-pointer transition-all border text-left group relative flex items-center gap-4 ${
-                  activeProject.id === item.id 
-                    ? "bg-[#244A44] border-white/10 shadow-lg scale-[1.02]" 
-                    : "bg-transparent border-transparent hover:bg-[#244A44]/30"
-                }`}
-              >
-                <div className="w-16 h-12 rounded-xl overflow-hidden border border-white/10 flex-shrink-0 bg-white/5 relative">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover"
-                  />
-                  {activeProject.id === item.id && (
-                    <div className="absolute inset-0 bg-[#1C3F3A]/20" />
-                  )}
-                </div>
-                
-                <div className="flex-1 min-w-0 py-1">
-                  <h4 className={`text-sm font-bold truncate transition-colors ${activeProject.id === item.id ? 'text-white' : 'text-white/70 group-hover:text-white'}`}>
-                    {item.title}
-                  </h4>
-                  <p className={`text-xs mt-1 truncate transition-colors ${activeProject.id === item.id ? 'text-white/60' : 'text-white/40'}`}>
-                    {item.category}
-                  </p>
-                </div>
-                
-                {/* Active indicator dot similar to reference, but simplified */}
-                {activeProject.id === item.id && (
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#EBE8D8] mr-2" />
-                )}
-              </button>
+              </motion.div>
             ))}
           </div>
         </div>
