@@ -166,13 +166,13 @@ export function Pricing() {
   };
 
   return (
-    <section id="pricing" className="py-24 bg-white relative overflow-hidden">
+    <section id="pricing" className="py-24 bg-[#1C3F3A] relative overflow-hidden text-white">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1C3F3A] mb-6 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
             Investimento
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-white/60 max-w-3xl mx-auto">
             Escolha um pacote fechado ou monte sua landing page conforme a necessidade.
           </p>
         </div>
@@ -183,8 +183,8 @@ export function Pricing() {
             
             {/* 1. Plans Section */}
             <div>
-              <h3 className="text-xl font-bold text-[#1C3F3A] mb-4 flex items-center gap-2">
-                <span className="bg-[#1C3F3A] text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <span className="bg-[#EBE8D8] text-[#1C3F3A] w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">1</span>
                 Planos Recomendados
               </h3>
               <div className="grid md:grid-cols-2 gap-4">
@@ -193,26 +193,26 @@ export function Pricing() {
                     key={plan.id}
                     onClick={() => selectPlan(plan.id)}
                     className={cn(
-                      "text-left p-6 rounded-2xl border-2 transition-all relative overflow-hidden group",
+                      "text-left p-6 rounded-[2rem] border-2 transition-all relative overflow-hidden group",
                       selectedMode === "plan" && selectedPlanId === plan.id
-                        ? "border-[#1C3F3A] bg-[#1C3F3A]/5 shadow-lg"
-                        : "border-gray-100 bg-white hover:border-[#1C3F3A]/30"
+                        ? "border-[#EBE8D8] bg-[#244A44] shadow-lg"
+                        : "border-white/10 bg-[#1C3F3A] hover:bg-[#244A44]/50"
                     )}
                   >
                     {selectedMode === "plan" && selectedPlanId === plan.id && (
-                        <div className="absolute top-4 right-4 text-[#1C3F3A]">
+                        <div className="absolute top-4 right-4 text-[#EBE8D8]">
                             <Check className="w-6 h-6" />
                         </div>
                     )}
-                    <h4 className="text-xl font-bold text-[#1C3F3A] mb-2">{plan.title}</h4>
-                    <p className="text-sm text-gray-500 mb-4">{plan.description}</p>
-                    <div className="text-lg font-bold text-[#1C3F3A] mb-4">
+                    <h4 className="text-xl font-bold text-white mb-2">{plan.title}</h4>
+                    <p className="text-sm text-white/60 mb-4">{plan.description}</p>
+                    <div className="text-lg font-bold text-[#EBE8D8] mb-4">
                       R$ {plan.priceMin} - R$ {plan.priceMax}
                     </div>
                     <ul className="space-y-1">
                       {plan.features.map((feature, idx) => (
-                        <li key={idx} className="text-xs text-gray-600 flex items-center gap-1.5">
-                          <div className="w-1 h-1 rounded-full bg-[#1C3F3A]" />
+                        <li key={idx} className="text-xs text-white/60 flex items-center gap-1.5">
+                          <div className="w-1 h-1 rounded-full bg-[#EBE8D8]" />
                           {feature}
                         </li>
                       ))}
@@ -224,8 +224,8 @@ export function Pricing() {
 
             {/* 2. Custom Section */}
             <div>
-              <h3 className="text-xl font-bold text-[#1C3F3A] mb-4 flex items-center gap-2">
-                <span className="bg-[#1C3F3A] text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <span className="bg-[#EBE8D8] text-[#1C3F3A] w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">2</span>
                 Ou monte do seu jeito
               </h3>
               <div className="space-y-3">
@@ -236,32 +236,32 @@ export function Pricing() {
                         key={item.id}
                         onClick={() => toggleItem(item.id)}
                         className={cn(
-                        "w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between group",
+                        "w-full text-left p-5 rounded-[1.25rem] border transition-all flex items-center justify-between group",
                         isSelected
-                            ? "border-[#1C3F3A] bg-[#1C3F3A] text-white shadow-md"
-                            : "border-gray-100 bg-white hover:border-[#1C3F3A]/30 text-[#1C3F3A]"
+                            ? "border-[#EBE8D8] bg-[#244A44] text-white shadow-md"
+                            : "border-white/10 bg-[#1C3F3A] hover:bg-[#244A44]/50 text-white"
                         )}
                     >
                         <div className="flex items-center gap-4">
                             <div className={cn(
                                 "w-5 h-5 rounded-full border flex items-center justify-center transition-colors",
-                                isSelected ? "border-white bg-white text-[#1C3F3A]" : "border-gray-300"
+                                isSelected ? "border-[#EBE8D8] bg-[#EBE8D8] text-[#1C3F3A]" : "border-white/20 bg-transparent"
                             )}>
                                 {isSelected && <Check className="w-3 h-3" />}
                             </div>
                             <div>
-                                <h4 className="font-semibold">{item.title}</h4>
-                                <p className={cn("text-sm", isSelected ? "text-white/70" : "text-gray-500")}>
+                                <h4 className="font-semibold text-white">{item.title}</h4>
+                                <p className={cn("text-sm", isSelected ? "text-white/70" : "text-white/40")}>
                                     {item.description}
                                 </p>
                             </div>
                         </div>
                         <div className="text-right">
-                            <div className={cn("font-bold text-sm", isSelected ? "text-white" : "text-[#1C3F3A]")}>
+                            <div className={cn("font-bold text-sm", isSelected ? "text-[#EBE8D8]" : "text-white")}>
                                 R$ {item.priceMin} - {item.priceMax}
                             </div>
                             {item.id === "dominio" && (
-                                <div className={cn("text-[10px]", isSelected ? "text-white/60" : "text-gray-400")}>
+                                <div className={cn("text-[10px]", isSelected ? "text-white/60" : "text-white/30")}>
                                     + R$ 55/mês
                                 </div>
                             )}
@@ -277,18 +277,20 @@ export function Pricing() {
           {/* Right Column: Sticky Summary */}
           <div className="lg:col-span-4">
             <div className="sticky top-24">
-                <div className="bg-[#1C3F3A] rounded-2xl p-6 text-white shadow-2xl relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                <div className="bg-[#244A44] rounded-[2rem] p-8 text-white shadow-2xl relative overflow-hidden border border-white/5">
+                    <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
                         <MessageSquare className="w-24 h-24" />
                     </div>
 
-                    <h3 className="text-lg font-medium text-white/80 mb-2 uppercase tracking-wide">Resumo do Pedido</h3>
-                    <div className="text-2xl font-bold mb-6">{currentSelectionTitle}</div>
+                    <h3 className="text-xs font-bold text-white/40 mb-2 uppercase tracking-widest">Resumo do Pedido</h3>
+                    <div className="text-2xl font-bold mb-6 text-white">{currentSelectionTitle}</div>
 
                     <div className="space-y-3 mb-8">
                         {currentSelectionItems.map((item, idx) => (
-                            <div key={idx} className="flex items-center gap-2 text-sm text-white/80">
-                                <Check className="w-4 h-4 text-[#EBE8D8]" />
+                            <div key={idx} className="flex items-center gap-3 text-sm text-white/80">
+                                <div className="w-5 h-5 rounded-full bg-[#EBE8D8]/10 flex items-center justify-center flex-shrink-0">
+                                    <Check className="w-3 h-3 text-[#EBE8D8]" />
+                                </div>
                                 {item}
                             </div>
                         ))}
@@ -308,11 +310,11 @@ export function Pricing() {
 
                     <button
                         onClick={handleWhatsAppClick}
-                        className="w-full bg-[#EBE8D8] text-[#1C3F3A] h-14 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white transition-all hover:scale-[1.02] shadow-lg"
+                        className="w-full bg-[#EBE8D8] text-[#1C3F3A] h-14 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(235,232,216,0.15)]"
                     >
                         Solicitar Orçamento <ArrowRight className="w-5 h-5" />
                     </button>
-                    <p className="text-center text-xs text-white/40 mt-4">
+                    <p className="text-center text-xs text-white/30 mt-4">
                         Valores estimados. O orçamento final será enviado após análise do projeto.
                     </p>
                 </div>
