@@ -1,248 +1,321 @@
 import { useState } from "react";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Check, ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface PackageOption {
+interface PriceItem {
   id: string;
   title: string;
   description: string;
-  price: number;
+  priceMin: number;
+  priceMax: number;
   features: string[];
-  selected: boolean;
+  isBase?: boolean; // If true, this is the base item that must be selected in custom mode
+}
+
+interface PredefinedPlan {
+  id: string;
+  title: string;
+  description: string;
+  priceMin: number;
+  priceMax: number;
+  features: string[];
+  includedItems: string[]; // IDs of items included in this plan
 }
 
 export function Pricing() {
-  const [packages, setPackages] = useState<PackageOption[]>([
+  const [selectedMode, setSelectedMode] = useState<"custom" | "plan">("custom");
+  const [selectedItems, setSelectedItems] = useState<string[]>(["landing-page"]);
+  const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
+
+  const items: PriceItem[] = [
     {
       id: "landing-page",
-      title: "Landing Page Completa",
-      description: "Design, desenvolvimento e configuração.",
-      price: 1500,
-      features: [
-        "Design exclusivo",
-        "Responsivo (Mobile-first)",
-        "Até 8 seções",
-        "Integração WhatsApp",
-      ],
-      selected: false,
+      title: "Landing Page Simples",
+      description: "Estrutura + Design + Responsivo",
+      priceMin: 850,
+      priceMax: 1500,
+      features: ["Design exclusivo", "Responsivo (Mobile-first)", "Até 5 seções"],
+      isBase: true,
     },
     {
       id: "copywriting",
-      title: "Copywriting Estratégico",
-      description: "Textos persuasivos focados em venda.",
-      price: 600,
-      features: [
-        "Estrutura de oferta",
-        "Headlines magnéticas",
-        "Gatilhos mentais",
-      ],
-      selected: false,
+      title: "Copywriting Completo",
+      description: "Textos persuasivos focados em venda",
+      priceMin: 250,
+      priceMax: 550,
+      features: ["Estrutura de oferta", "Headlines magnéticas", "Gatilhos mentais"],
     },
     {
       id: "integracoes",
-      title: "Integrações Avançadas",
-      description: "Conexão com suas ferramentas.",
-      price: 400,
-      features: [
-        "CRM / Email Marketing",
-        "Pixel do Facebook/Google",
-        "Automações básicas",
-      ],
-      selected: false,
+      title: "Integrações Essenciais",
+      description: "WhatsApp, formulário, e-mail",
+      priceMin: 300,
+      priceMax: 600,
+      features: ["Botão WhatsApp", "Formulário de contato", "Disparo de e-mail"],
     },
     {
-      id: "hospedagem",
-      title: "Configuração de Hospedagem",
-      description: "Deixe o técnico comigo.",
-      price: 200,
-      features: [
-        "Configuração de domínio",
-        "SSL (Site seguro)",
-        "Hospedagem rápida",
-      ],
-      selected: false,
+      id: "dominio",
+      title: "Domínio e Hospedagem",
+      description: "Configuração completa",
+      priceMin: 200,
+      priceMax: 400,
+      features: ["Configuração de domínio", "SSL (Site seguro)", "Hospedagem rápida"],
     },
-  ]);
+  ];
 
-  const togglePackage = (id: string) => {
-    setPackages(
-      packages.map((pkg) =>
-        pkg.id === id ? { ...pkg, selected: !pkg.selected } : pkg,
-      ),
-    );
+  const plans: PredefinedPlan[] = [
+    {
+      id: "plan-essencial",
+      title: "Plano Essencial",
+      description: "Para começar com o pé direito",
+      priceMin: 1200,
+      priceMax: 1700,
+      features: ["Landing Page Simples", "Copywriting Completo", "Domínio e Hospedagem"],
+      includedItems: ["landing-page", "copywriting", "dominio"],
+    },
+    {
+      id: "plan-profissional",
+      title: "Plano Profissional",
+      description: "Para quem quer vender com estratégia",
+      priceMin: 1400,
+      priceMax: 2200,
+      features: ["Landing Page Simples", "Copywriting Completo", "Integrações", "Domínio e Hospedagem"],
+      includedItems: ["landing-page", "copywriting", "integracoes", "dominio"],
+    },
+  ];
+
+  const toggleItem = (id: string) => {
+    // Switch to custom mode if not already
+    if (selectedMode === "plan") {
+      setSelectedMode("custom");
+      setSelectedPlanId(null);
+      // Reset to base + clicked item
+      const newSelection = ["landing-page"];
+      if (id !== "landing-page") newSelection.push(id);
+      setSelectedItems(newSelection);
+      return;
+    }
+
+    // Handle base item logic
+    if (id === "landing-page") {
+      // Cannot deselect base item in custom mode if it's the only thing, 
+      // but actually the prompt says "must always remain checked".
+      // So we just ensure it stays there.
+      if (!selectedItems.includes("landing-page")) {
+         setSelectedItems([...selectedItems, "landing-page"]);
+      }
+      return; 
+    }
+
+    // Toggle other items
+    if (selectedItems.includes(id)) {
+      setSelectedItems(selectedItems.filter((item) => item !== id));
+    } else {
+      setSelectedItems([...selectedItems, id]);
+    }
   };
 
-  const selectedPackages = packages.filter((pkg) => pkg.selected);
-  const totalPrice = selectedPackages.reduce((sum, pkg) => sum + pkg.price, 0);
+  const selectPlan = (planId: string) => {
+    setSelectedMode("plan");
+    setSelectedPlanId(planId);
+    setSelectedItems([]); // Clear custom items visually
+  };
+
+  // Calculate Totals
+  let totalMin = 0;
+  let totalMax = 0;
+  let currentSelectionTitle = "";
+  let currentSelectionItems: string[] = [];
+
+  if (selectedMode === "plan" && selectedPlanId) {
+    const plan = plans.find(p => p.id === selectedPlanId);
+    if (plan) {
+      totalMin = plan.priceMin;
+      totalMax = plan.priceMax;
+      currentSelectionTitle = plan.title;
+      currentSelectionItems = plan.features;
+    }
+  } else {
+    currentSelectionTitle = "Personalizado";
+    selectedItems.forEach(itemId => {
+      const item = items.find(i => i.id === itemId);
+      if (item) {
+        totalMin += item.priceMin;
+        totalMax += item.priceMax;
+        currentSelectionItems.push(item.title);
+      }
+    });
+    // Add monthly fee note if domain is selected
+    if (selectedItems.includes("dominio")) {
+        // We handle the +55/mo in the text display, not the sum for now, or append it textually.
+    }
+  }
 
   const handleWhatsAppClick = () => {
-    const packagesList = selectedPackages
-      .map((pkg) => `• ${pkg.title} - R$ ${pkg.price.toLocaleString("pt-BR")}`)
-      .join("%0A");
+    let message = "";
+    
+    if (selectedMode === "plan" && selectedPlanId) {
+        const plan = plans.find(p => p.id === selectedPlanId);
+        message = `Olá! Gostaria de um orçamento para o *${plan?.title}*.\n\nItens inclusos:\n${plan?.features.map(f => `• ${f}`).join('\n')}\n\nFaixa de valor estimada: R$ ${totalMin.toLocaleString("pt-BR")} a R$ ${totalMax.toLocaleString("pt-BR")}`;
+    } else {
+        const selectedNames = items.filter(i => selectedItems.includes(i.id)).map(i => i.title).join(", ");
+        message = `Olá! Montei meu pacote personalizado de landing page:\n\nItens:\n${items.filter(i => selectedItems.includes(i.id)).map(i => `• ${i.title}`).join('\n')}\n\nFaixa de valor estimada: R$ ${totalMin.toLocaleString("pt-BR")} a R$ ${totalMax.toLocaleString("pt-BR")}`;
+    }
 
-    const message = `Olá! Gostaria de solicitar um orçamento:%0A%0A*Serviços Selecionados:*%0A${packagesList}%0A%0A*Valor Total: R$ ${totalPrice.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}*`;
-
-    const whatsappUrl = `https://wa.me/5567993498440?text=${message}`;
-    window.open(whatsappUrl, "_blank");
+    window.open(`https://wa.me/5567993498440?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   return (
-    <section className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-primary opacity-[0.01]"></div>
-
+    <section id="pricing" className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-            Monte seu pacote e receba um orçamento
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1C3F3A] mb-6 tracking-tight">
+            Investimento
           </h2>
-          <p className="text-lg text-white/60 max-w-3xl mx-auto">
-            Selecione o que você precisa. O valor é atualizado na hora e você
-            pode me chamar no WhatsApp com tudo pronto.
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Escolha um pacote fechado ou monte sua landing page conforme a necessidade.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Packages List */}
-          <div className="lg:col-span-2 space-y-4">
-            {packages.map((pkg) => (
-              <button
-                key={pkg.id}
-                onClick={() => togglePackage(pkg.id)}
-                className={`w-full text-left p-6 rounded-2xl border-2 transition-all ${
-                  pkg.selected
-                    ? "border-primary bg-primary/5"
-                    : "border-white/10 bg-white/[0.02] hover:border-white/20"
-                }`}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-start gap-4">
-                    <div
-                      className={`w-6 h-6 rounded-full border-2 flex items-center justify-center mt-1 transition-all ${
-                        pkg.selected
-                          ? "border-primary bg-primary"
-                          : "border-white/30"
-                      }`}
+        <div className="grid lg:grid-cols-12 gap-8">
+          {/* Left Column: Options */}
+          <div className="lg:col-span-8 space-y-8">
+            
+            {/* 1. Plans Section */}
+            <div>
+              <h3 className="text-xl font-bold text-[#1C3F3A] mb-4 flex items-center gap-2">
+                <span className="bg-[#1C3F3A] text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+                Planos Recomendados
+              </h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                {plans.map((plan) => (
+                  <button
+                    key={plan.id}
+                    onClick={() => selectPlan(plan.id)}
+                    className={cn(
+                      "text-left p-6 rounded-2xl border-2 transition-all relative overflow-hidden group",
+                      selectedMode === "plan" && selectedPlanId === plan.id
+                        ? "border-[#1C3F3A] bg-[#1C3F3A]/5 shadow-lg"
+                        : "border-gray-100 bg-white hover:border-[#1C3F3A]/30"
+                    )}
+                  >
+                    {selectedMode === "plan" && selectedPlanId === plan.id && (
+                        <div className="absolute top-4 right-4 text-[#1C3F3A]">
+                            <Check className="w-6 h-6" />
+                        </div>
+                    )}
+                    <h4 className="text-xl font-bold text-[#1C3F3A] mb-2">{plan.title}</h4>
+                    <p className="text-sm text-gray-500 mb-4">{plan.description}</p>
+                    <div className="text-lg font-bold text-[#1C3F3A] mb-4">
+                      R$ {plan.priceMin} - R$ {plan.priceMax}
+                    </div>
+                    <ul className="space-y-1">
+                      {plan.features.map((feature, idx) => (
+                        <li key={idx} className="text-xs text-gray-600 flex items-center gap-1.5">
+                          <div className="w-1 h-1 rounded-full bg-[#1C3F3A]" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 2. Custom Section */}
+            <div>
+              <h3 className="text-xl font-bold text-[#1C3F3A] mb-4 flex items-center gap-2">
+                <span className="bg-[#1C3F3A] text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+                Ou monte do seu jeito
+              </h3>
+              <div className="space-y-3">
+                {items.map((item) => {
+                   const isSelected = selectedMode === "custom" && selectedItems.includes(item.id);
+                   return (
+                    <button
+                        key={item.id}
+                        onClick={() => toggleItem(item.id)}
+                        className={cn(
+                        "w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between group",
+                        isSelected
+                            ? "border-[#1C3F3A] bg-[#1C3F3A] text-white shadow-md"
+                            : "border-gray-100 bg-white hover:border-[#1C3F3A]/30 text-[#1C3F3A]"
+                        )}
                     >
-                      {pkg.selected && (
-                        <svg
-                          className="w-4 h-4 text-black"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-white mb-2">
-                        {pkg.title}
-                      </h3>
-                      <p className="text-white/60 mb-4">{pkg.description}</p>
-                      <div className="flex flex-wrap gap-3">
-                        {pkg.features.map((feature, idx) => (
-                          <span
-                            key={idx}
-                            className="text-sm text-white/50 bg-white/5 px-3 py-1 rounded-full"
-                          >
-                            ✓ {feature}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-sm text-white/40 mb-1">R$</div>
-                    <div className="text-2xl font-bold text-white">
-                      {pkg.price.toLocaleString("pt-BR", {
-                        minimumFractionDigits: 2,
-                      })}
-                    </div>
-                  </div>
-                </div>
-              </button>
-            ))}
+                        <div className="flex items-center gap-4">
+                            <div className={cn(
+                                "w-5 h-5 rounded-full border flex items-center justify-center transition-colors",
+                                isSelected ? "border-white bg-white text-[#1C3F3A]" : "border-gray-300"
+                            )}>
+                                {isSelected && <Check className="w-3 h-3" />}
+                            </div>
+                            <div>
+                                <h4 className="font-semibold">{item.title}</h4>
+                                <p className={cn("text-sm", isSelected ? "text-white/70" : "text-gray-500")}>
+                                    {item.description}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <div className={cn("font-bold text-sm", isSelected ? "text-white" : "text-[#1C3F3A]")}>
+                                R$ {item.priceMin} - {item.priceMax}
+                            </div>
+                            {item.id === "dominio" && (
+                                <div className={cn("text-[10px]", isSelected ? "text-white/60" : "text-gray-400")}>
+                                    + R$ 55/mês
+                                </div>
+                            )}
+                        </div>
+                    </button>
+                   );
+                })}
+              </div>
+            </div>
+
           </div>
 
-          {/* Summary Card */}
-          <div className="lg:sticky lg:top-8 h-fit">
-            <div className="bg-gradient-to-br from-white/[0.07] to-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden">
-              {/* Header */}
-              <div className="bg-primary/10 border-b border-primary/20 px-6 py-4">
-                <div className="text-sm text-primary/80 font-medium mb-1">
-                  INVESTIMENTO ESTIMADO
-                </div>
-                <div className="text-4xl font-bold text-white">
-                  R${" "}
-                  {totalPrice.toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                  })}
-                </div>
-              </div>
+          {/* Right Column: Sticky Summary */}
+          <div className="lg:col-span-4">
+            <div className="sticky top-24">
+                <div className="bg-[#1C3F3A] rounded-2xl p-6 text-white shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                        <MessageSquare className="w-24 h-24" />
+                    </div>
 
-              {/* Items */}
-              <div className="p-6 space-y-3">
-                {selectedPackages.length > 0 ? (
-                  selectedPackages.map((pkg) => (
-                    <div
-                      key={pkg.id}
-                      className="flex justify-between items-center text-sm"
+                    <h3 className="text-lg font-medium text-white/80 mb-2 uppercase tracking-wide">Resumo do Pedido</h3>
+                    <div className="text-2xl font-bold mb-6">{currentSelectionTitle}</div>
+
+                    <div className="space-y-3 mb-8">
+                        {currentSelectionItems.map((item, idx) => (
+                            <div key={idx} className="flex items-center gap-2 text-sm text-white/80">
+                                <Check className="w-4 h-4 text-[#EBE8D8]" />
+                                {item}
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="border-t border-white/10 pt-6 mb-8">
+                        <div className="text-sm text-white/60 mb-1">Investimento Estimado</div>
+                        <div className="text-3xl font-bold text-[#EBE8D8]">
+                            R$ {totalMin.toLocaleString("pt-BR")} <span className="text-lg text-white/60 font-normal">a</span> R$ {totalMax.toLocaleString("pt-BR")}
+                        </div>
+                        {selectedItems.includes("dominio") && (
+                            <div className="text-xs text-white/40 mt-1">
+                                + R$ 55,00/mês (Hospedagem)
+                            </div>
+                        )}
+                    </div>
+
+                    <button
+                        onClick={handleWhatsAppClick}
+                        className="w-full bg-[#EBE8D8] text-[#1C3F3A] h-14 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-white transition-all hover:scale-[1.02] shadow-lg"
                     >
-                      <span className="text-white/70">{pkg.title}</span>
-                      <span className="text-white font-medium">
-                        R$ {pkg.price.toLocaleString("pt-BR")}
-                      </span>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-white/40 text-sm text-center py-4">
-                    Selecione os serviços acima
-                  </p>
-                )}
-
-                {selectedPackages.length > 0 && (
-                  <>
-                    <div className="border-t border-white/10 pt-3 mt-3">
-                      <div className="flex justify-between items-center font-semibold">
-                        <span className="text-white">Total</span>
-                        <span className="text-white text-lg">
-                          R${" "}
-                          {totalPrice.toLocaleString("pt-BR", {
-                            minimumFractionDigits: 2,
-                          })}
-                        </span>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-
-              {/* CTA Button */}
-              <div className="p-6 pt-0">
-                <button
-                  disabled={selectedPackages.length === 0}
-                  onClick={handleWhatsAppClick}
-                  className={`w-full h-14 rounded-full font-semibold text-lg transition-all flex items-center justify-center ${
-                    selectedPackages.length > 0
-                      ? "bg-primary text-black hover:bg-primary/90 shadow-[0_0_30px_rgba(255,235,122,0.3)]"
-                      : "bg-white/5 text-white/30 cursor-not-allowed"
-                  }`}
-                >
-                  <MessageSquare className="mr-2 h-5 w-5" />
-                  Solicitar Orçamento
-                </button>
-                <div className="mt-4 text-center">
-                  <p className="text-sm text-primary font-semibold">
-                    ✓ Sem compromisso
-                  </p>
-                  <p className="text-sm text-white/70 mt-1">
-                    Fale diretamente comigo
-                  </p>
+                        Solicitar Orçamento <ArrowRight className="w-5 h-5" />
+                    </button>
+                    <p className="text-center text-xs text-white/40 mt-4">
+                        Valores estimados. O orçamento final será enviado após análise do projeto.
+                    </p>
                 </div>
-              </div>
             </div>
           </div>
         </div>

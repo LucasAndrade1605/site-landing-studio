@@ -17,9 +17,10 @@ export function Navigation() {
   }, []);
 
   const navLinks = [
-    { name: "Projetos", href: "#projects" },
     { name: "Serviços", href: "#services" },
+    { name: "Projetos", href: "#projects" },
     { name: "Sobre", href: "#about" },
+    { name: "Orçamento", href: "#pricing" },
     { name: "Contato", href: "#contact" },
   ];
 
@@ -27,12 +28,17 @@ export function Navigation() {
     <nav
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-        scrolled ? "bg-[#050608]/80 backdrop-blur-xl border-white/5 py-4" : "bg-transparent py-6"
+        scrolled
+          ? "bg-[#050608]/80 backdrop-blur-xl border-white/5 py-4"
+          : "bg-transparent py-6",
       )}
     >
       <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-tighter text-white flex items-center gap-2 hover:opacity-90 transition-opacity">
-            <span className="text-primary">Landing</span>Studio
+        <Link
+          href="/"
+          className="text-xl font-bold tracking-tighter text-white flex items-center gap-2 hover:opacity-90 transition-opacity"
+        >
+          <span className="text-primary">Landing</span>Studio
         </Link>
 
         {/* Desktop Nav */}
@@ -46,16 +52,23 @@ export function Navigation() {
               {link.name}
             </a>
           ))}
-          <Button 
-            variant="default" 
-            className="rounded-full bg-primary text-black hover:bg-primary/90 font-medium px-6"
+          <Button
+            onClick={() => {
+              const pricingSection = document.getElementById("pricing");
+              pricingSection?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
+            variant="default"
+            className="rounded-full cursor-pointer bg-primary text-black hover:bg-primary/90 font-medium px-6"
           >
             Começar Projeto
           </Button>
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >

@@ -3,7 +3,10 @@ import { Check } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-[#020304] pt-24 pb-12 border-t border-white/5">
+    <footer
+      id="contact"
+      className="bg-[#020304] pt-24 pb-12 border-t border-white/5"
+    >
       <div className="container mx-auto px-6 max-w-7xl">
         <div className="grid md:grid-cols-12 gap-12 mb-20">
           <div className="md:col-span-5 space-y-6">

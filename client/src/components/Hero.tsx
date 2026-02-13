@@ -51,14 +51,17 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Button className="h-14 px-8 rounded-full bg-primary text-black hover:bg-primary/90 text-base font-semibold shadow-[0_0_20px_rgba(255,235,122,0.3)] hover:shadow-[0_0_30px_rgba(255,235,122,0.5)] transition-all">
-              Iniciar Projeto <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
             <Button
-              variant="outline"
-              className="h-14 px-8 rounded-full border-white/10 text-white hover:bg-white/5 hover:text-white hover:border-white/20 text-base font-medium backdrop-blur-sm"
+              onClick={() => {
+                const pricingSection = document.getElementById("pricing");
+                pricingSection?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }}
+              className="h-14 px-8 rounded-full cursor-pointer bg-primary text-black hover:bg-primary/90 text-base font-semibold shadow-[0_0_20px_rgba(255,235,122,0.3)] hover:shadow-[0_0_30px_rgba(255,235,122,0.5)] transition-all"
             >
-              <Play className="mr-2 w-4 h-4 fill-current" /> Ver Showreel
+              Iniciar Projeto <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </motion.div>
 
@@ -81,7 +84,7 @@ export function Hero() {
         >
           <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-auto lg:h-full flex items-center justify-center">
             {/* Main Video Animation */}
-            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl bg-[#1C3F3A]">
+            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent opacity-50 mix-blend-overlay pointer-events-none z-10" />
               <video
                 src={heroVideo}
@@ -114,7 +117,9 @@ export function Hero() {
                 %
               </div>
               <div>
-                <div className="text-xs text-white/60 font-medium uppercase tracking-wide">Conversão</div>
+                <div className="text-xs text-white/60 font-medium uppercase tracking-wide">
+                  Conversão
+                </div>
                 <div className="text-lg font-bold text-white">+124%</div>
               </div>
             </motion.div>
@@ -136,7 +141,9 @@ export function Hero() {
                 ★
               </div>
               <div>
-                <div className="text-xs text-white/60 font-medium uppercase tracking-wide">Satisfação</div>
+                <div className="text-xs text-white/60 font-medium uppercase tracking-wide">
+                  Satisfação
+                </div>
                 <div className="text-lg font-bold text-white">5.0</div>
               </div>
             </motion.div>
