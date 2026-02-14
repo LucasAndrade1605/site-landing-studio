@@ -20,7 +20,7 @@ export function Navigation() {
     { name: "Serviços", href: "#services" },
     { name: "Projetos", href: "#projects" },
     { name: "Sobre", href: "#about" },
-    { name: "Orçamento", href: "#pricing" },
+    { name: "Investimento", href: "#pricing" },
     { name: "Contato", href: "#contact" },
   ];
 

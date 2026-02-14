@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Phone } from "lucide-react";
 
 export function Footer() {
   return (
@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid md:grid-cols-12 gap-12 mb-20">
           <div className="md:col-span-5 space-y-6">
             <a
-              href="/"
+              href="#hero"
               className="text-2xl font-bold tracking-tighter text-white flex items-center gap-2"
             >
               <span className="text-primary">Landing</span>Studio
@@ -22,30 +22,17 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="md:col-span-2 space-y-6">
-            <h4 className="text-white font-semibold">Empresa</h4>
-            <ul className="space-y-4 text-white/60">
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Sobre Nós
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Carreiras
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Contato
-                </a>
-              </li>
-            </ul>
+          <div className="md:col-span-3 space-y-6">
+            <h4 className="text-white font-semibold">Contato</h4>
+            <a
+              href="https://wa.me/5567993498440"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/60 hover:text-primary transition-colors flex items-center gap-2"
+            >
+              <Phone className="w-5 h-5" />
+              (67) 9 9349-8440
+            </a>
           </div>
         </div>
 

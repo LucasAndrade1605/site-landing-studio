@@ -5,7 +5,7 @@ import heroVideo from "@/assets/videos/hero-animation.mp4";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-32 pb-20 overflow-hidden">
+    <section id="hero" className="relative min-h-[90vh] flex items-center pt-32 pb-20 overflow-hidden">
       {/* Background Decor - Animado */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse" />
@@ -23,7 +23,7 @@ export function Hero() {
             transition={{ duration: 0.5 }}
           >
             <span className="inline-block px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-primary text-sm font-medium tracking-wide mb-6">
-              LANDING PAGES DE ALTA CONVERSÃO
+              LANDING PAGES DE QUALIDADE PREMIUM
             </span>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] text-white">
               Design que{" "}

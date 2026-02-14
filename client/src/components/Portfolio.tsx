@@ -9,7 +9,11 @@ const projects = [
     title: "Pontual Informática",
     category: "Automação de bares e restaurantes e Serviços de TI",
     url: "https://pontualinformatica.net.br",
-    tags: ["Vue", "Chart.js", "HubSpot"],
+    tags: [
+      "Landing Page Simples",
+      "Copywriting Completo",
+      "Integrações Essenciais",
+    ],
     thumbnail: "/images/pagina-pontual.png",
   },
   {
@@ -17,7 +21,12 @@ const projects = [
     title: "E.S.A Certificados",
     category: "Emissão de certificados digitais",
     url: "https://esacertificadora.com.br",
-    tags: ["React", "Next.js", "Tailwind"],
+    tags: [
+      "Landing Page Simples",
+      "Copywriting Completo",
+      "Integrações Essenciais",
+      "Domínio e Hospedagem",
+    ],
     thumbnail: "/images/pagina-esa-certificados.png",
   },
   {
@@ -77,7 +86,7 @@ export function Portfolio() {
             </div>
 
             {/* Live Website Preview */}
-            <div className="relative aspect-[16/10] rounded-[2rem] overflow-hidden bg-[#12141B] border border-white/10 mb-6">
+            <div className="hidden md:block relative aspect-[16/10] rounded-[2rem] overflow-hidden bg-[#12141B] border border-white/10 mb-6">
               <iframe
                 src={selectedProject.url}
                 className="w-full h-full"
@@ -89,8 +98,8 @@ export function Portfolio() {
 
             {/* Tags and Actions */}
             <div className="flex items-center justify-between">
-              <div className="flex gap-3">
-                {selectedProject.tags.map((tag) => (
+              <div className="flex flex-wrap gap-3 items-start">
+                {selectedProject.tags.slice(0, 9).map((tag) => (
                   <span
                     key={tag}
                     className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm"
@@ -98,6 +107,11 @@ export function Portfolio() {
                     {tag}
                   </span>
                 ))}
+                {selectedProject.tags.length > 9 && (
+                  <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm">
+                    +{selectedProject.tags.length - 9}
+                  </span>
+                )}
               </div>
 
               <div className="flex gap-3">
