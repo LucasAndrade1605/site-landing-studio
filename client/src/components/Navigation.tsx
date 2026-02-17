@@ -53,7 +53,10 @@ export function Navigation() {
           href="/"
           className="text-xl font-bold tracking-tighter text-white flex items-center gap-2 hover:opacity-90 transition-opacity"
         >
-          <span className="text-primary">Landing</span>Studio
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+            Landing
+          </span>{" "}
+          Studio
         </Link>
 
         {/* Desktop Nav */}

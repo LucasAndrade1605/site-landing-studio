@@ -14,7 +14,10 @@ export function Footer() {
               href="#hero"
               className="text-2xl font-bold tracking-tighter text-white flex items-center gap-2"
             >
-              <span className="text-primary">Landing</span>Studio
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                Landing
+              </span>{" "}
+              Studio
             </a>
             <p className="text-white/60 max-w-md text-lg">
               Especialistas em criar landing pages que não apenas impressionam,
