@@ -1,4 +1,4 @@
-import { Code2, Cpu, Award, Zap } from "lucide-react";
+import { Code2, TrendingUp, Award } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function About() {
@@ -75,14 +75,12 @@ export function About() {
 
               <div className="flex gap-4">
                 <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-secondary shrink-0">
-                  <Zap className="w-6 h-6" />
+                  <TrendingUp className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-bold mb-1">
-                    Performance Real
-                  </h4>
+                  <h4 className="text-white font-bold mb-1">Alta Conversão</h4>
                   <p className="text-sm text-white/50">
-                    Sites que carregam instantaneamente.
+                    Otimizado para transformar visitantes em clientes.
                   </p>
                 </div>
               </div>
@@ -152,7 +150,7 @@ export function About() {
                   <div className="flex pl-4">
                     <span className="text-purple-400">await </span> client.
                     <span className="text-blue-400">deploy</span>(
-                    <span className="text-orange-400">LucasDev.solution</span>);
+                    <span className="text-orange-400">Dev.solution</span>);
                   </div>
                   <div className="flex pl-4">
                     <span className="text-purple-400">return</span>{" "}
