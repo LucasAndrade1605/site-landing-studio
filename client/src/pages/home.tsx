@@ -3,8 +3,8 @@ import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { Portfolio } from "@/components/Portfolio";
 import { About } from "@/components/About";
-import { Footer } from "@/components/Footer";
 import { Pricing } from "@/components/Pricing";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
