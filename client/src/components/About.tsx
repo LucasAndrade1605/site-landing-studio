@@ -34,7 +34,7 @@ export function About() {
               <p>
                 Com mais de{" "}
                 <strong className="text-white">
-                  {new Date().getFullYear() - 2020} anos de experiência
+                  {new Date().getFullYear() - 2021} anos de experiência
                 </strong>{" "}
                 como programador, nossa empresa nasceu para elevar o padrão de
                 desenvolvimento web.
@@ -112,7 +112,7 @@ export function About() {
                   <div className="flex pl-4">
                     <span className="text-blue-400">experience</span>:{" "}
                     <span className="text-orange-400">
-                      "{new Date().getFullYear() - 2020}+ Years"
+                      "{new Date().getFullYear() - 2021}+ Years"
                     </span>
                     ,
                   </div>

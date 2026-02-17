@@ -30,7 +30,7 @@ export function Hero() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
                 vende
               </span>{" "}
-              sua visão.
+              sua visão
             </h1>
           </motion.div>
 
