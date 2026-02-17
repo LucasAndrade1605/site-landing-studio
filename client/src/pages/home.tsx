@@ -4,6 +4,7 @@ import { Features } from "@/components/Features";
 import { Portfolio } from "@/components/Portfolio";
 import { Footer } from "@/components/Footer";
 import { Pricing } from "@/components/Pricing";
+import { Faq } from "@/components/Faq";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Features />
         <Portfolio />
         <Pricing />
+        <Faq />
       </main>
       <Footer />
     </div>

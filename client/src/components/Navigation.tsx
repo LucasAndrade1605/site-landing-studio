@@ -7,13 +7,27 @@ import { Menu, X } from "lucide-react";
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 900);
+    };
+
+    // Inicializa o estado
+    handleResize();
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const navLinks = [
@@ -21,6 +35,7 @@ export function Navigation() {
     { name: "Projetos", href: "#projects" },
     { name: "Sobre", href: "#about" },
     { name: "Investimento", href: "#pricing" },
+    { name: "Perguntas", href: "#faq" },
     { name: "Contato", href: "#contact" },
   ];
 
@@ -42,43 +57,47 @@ export function Navigation() {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+        {!isMobile && (
+          <div className="flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-white/70 hover:text-white transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+            <Button
+              onClick={() => {
+                const pricingSection = document.getElementById("pricing");
+                pricingSection?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }}
+              variant="default"
+              className="rounded-full cursor-pointer bg-primary text-black hover:bg-primary/90 font-medium px-6"
             >
-              {link.name}
-            </a>
-          ))}
-          <Button
-            onClick={() => {
-              const pricingSection = document.getElementById("pricing");
-              pricingSection?.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-            }}
-            variant="default"
-            className="rounded-full cursor-pointer bg-primary text-black hover:bg-primary/90 font-medium px-6"
-          >
-            Começar Projeto
-          </Button>
-        </div>
+              Começar Projeto
+            </Button>
+          </div>
+        )}
 
         {/* Mobile Toggle */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X /> : <Menu />}
-        </button>
+        {isMobile && (
+          <button
+            className="text-white"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X /> : <Menu />}
+          </button>
+        )}
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#050608] border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-5 shadow-2xl">
+      {isMobile && mobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-[#050608] border-b border-white/10 p-6 flex flex-col gap-4 animate-in slide-in-from-top-5 shadow-2xl">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -89,7 +108,17 @@ export function Navigation() {
               {link.name}
             </a>
           ))}
-          <Button className="w-full rounded-full bg-primary text-black hover:bg-primary/90 font-medium mt-4">
+          <Button
+            className="w-full rounded-full bg-primary text-black hover:bg-primary/90 font-medium mt-4"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              const pricingSection = document.getElementById("pricing");
+              pricingSection?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
+          >
             Começar Projeto
           </Button>
         </div>
