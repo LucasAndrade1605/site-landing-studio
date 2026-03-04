@@ -26,7 +26,7 @@ const faqData: FAQItem[] = [
   {
     question: "Qual a forma de pagamento?",
     answer:
-      "Aceitamos PIX e cartão de crédito, com possibilidade de parcelamento em até 4x. O pagamento é realizado em duas etapas: 50% no início do desenvolvimento e 50% na entrega do projeto.",
+      "Aceitamos PIX e cartão de crédito, com possibilidade de parcelamento em até 12x, com juros. O pagamento é realizado em duas etapas: 50% no início do desenvolvimento e 50% na entrega do projeto.",
   },
   {
     question: "E se eu não gostar do resultado?",
