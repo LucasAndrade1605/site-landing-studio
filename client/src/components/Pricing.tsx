@@ -32,7 +32,7 @@ export function Pricing() {
         "Domínio e Hospedagem",
       ],
       yearlyBadge: "2 Meses Isentos",
-      yearlyText: "Plano anual: pague 10 de 12 mensalidades.",
+      yearlyText: "Plano anual com 2 primeiros meses sem mensalidade.",
     },
     {
       id: "profissional",
@@ -51,26 +51,25 @@ export function Pricing() {
     },
     {
       id: "painel",
-      title: "Profissional + Painel",
+      title: "Profissional + Painel Administrativo",
       setupFee: 600,
       monthlyFee: 189.9,
-      highlightFeature: "Painel Admin: Edite textos, imagens e valores",
       features: [
         "Landing Page Premium",
         "Copywriting Completo",
         "Integrações Essenciais",
         "Domínio e Hospedagem",
+        "Painel Administrativo",
       ],
-      yearlyBadge: "2 Meses Grátis",
+      yearlyBadge: "2 Meses Isentos",
       yearlyText: "Plano anual com 2 primeiros meses sem mensalidade.",
     },
   ];
 
   const serviceDetails = [
     {
-      title: "Landing Page Simples",
+      title: "Landing Page Premium",
       description: "Estrutura + Design + Responsivo",
-      mandatory: true,
     },
     {
       title: "Copywriting Completo",
@@ -86,8 +85,8 @@ export function Pricing() {
     },
     {
       title: "Painel Administrativo",
-      description: "Gerenciamento autônomo de imagens, cards e textos da página",
-      special: true,
+      description:
+        "Gerenciamento de imagens, cards, textos e valores da página",
     },
   ];
 
@@ -136,13 +135,14 @@ export function Pricing() {
             Investimento
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-            Planos de alto nível para o{" "}
+            Planos de alto nível para{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-              seu projeto
+              sua empresa
             </span>
           </h2>
           <p className="text-white/60 text-lg">
-            Selecione a estrutura ideal para a sua página. Transparência nos custos de implantação e manutenção.
+            Selecione a estrutura ideal para a sua página. Transparência nos
+            custos de implantação e mensalidades.
           </p>
 
           {/* Toggle Mensal/Anual */}
@@ -153,14 +153,16 @@ export function Pricing() {
                   "absolute inset-y-1.5 w-[calc(50%-6px)] rounded-full bg-primary transition-transform duration-500 ease-in-out z-0",
                   billingCycle === "monthly"
                     ? "translate-x-0 left-1.5"
-                    : "translate-x-full left-[2px]"
+                    : "translate-x-full left-[2px]",
                 )}
               />
               <button
                 onClick={() => setBillingCycle("monthly")}
                 className={cn(
                   "py-3 rounded-full text-sm font-semibold transition-all relative z-10 flex-1",
-                  billingCycle === "monthly" ? "text-black" : "text-white/60 hover:text-white"
+                  billingCycle === "monthly"
+                    ? "text-black"
+                    : "text-white/60 hover:text-white",
                 )}
               >
                 Mensal
@@ -169,7 +171,9 @@ export function Pricing() {
                 onClick={() => setBillingCycle("yearly")}
                 className={cn(
                   "py-3 rounded-full text-sm font-semibold transition-all relative z-10 flex-1",
-                  billingCycle === "yearly" ? "text-black" : "text-white/60 hover:text-white"
+                  billingCycle === "yearly"
+                    ? "text-black"
+                    : "text-white/60 hover:text-white",
                 )}
               >
                 Anual
@@ -196,7 +200,9 @@ export function Pricing() {
                     onClick={() => setSelectedPlanId(plan.id)}
                     className={cn(
                       "relative flex flex-col text-left transition-all duration-300 outline-none w-full group rounded-[24px]",
-                      isSelected ? "z-10 scale-[1.03]" : "z-0 hover:-translate-y-1"
+                      isSelected
+                        ? "z-10 scale-[1.03]"
+                        : "z-0 hover:-translate-y-1",
                     )}
                   >
                     <div
@@ -204,18 +210,19 @@ export function Pricing() {
                         "relative flex flex-col w-full rounded-[24px] p-8 border h-full overflow-hidden transition-colors duration-300",
                         isSelected
                           ? "bg-[#10121A] border-primary shadow-[0_0_30px_-5px_rgba(255,235,122,0.2)]"
-                          : "bg-[#0A0C10] border-white/5 hover:border-white/15"
+                          : "bg-[#0A0C10] border-white/5 hover:border-white/15",
                       )}
                     >
                       {/* Selo (Popular / Anual) */}
-                      {((plan.popular && !isYearly) || (isYearly && plan.yearlyBadge)) && (
+                      {((plan.popular && !isYearly) ||
+                        (isYearly && plan.yearlyBadge)) && (
                         <div className="absolute top-0 inset-x-0 flex justify-center">
                           <div
                             className={cn(
                               "text-[10px] font-bold px-4 py-1.5 rounded-b-xl uppercase tracking-wider",
                               isYearly
-                                ? "bg-green-500 text-white"
-                                : "bg-primary text-black"
+                                ? "bg-green-500 text-black"
+                                : "bg-primary text-black",
                             )}
                           >
                             {isYearly ? plan.yearlyBadge : "Recomendado"}
@@ -232,8 +239,8 @@ export function Pricing() {
                           className={cn(
                             "w-6 h-6 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors mt-0.5",
                             isSelected
-                              ? "border-primary bg-primary text-black"
-                              : "border-white/20 bg-transparent"
+                              ? "border-primary bg-primary text-primary"
+                              : "border-white/20 bg-transparent",
                           )}
                         >
                           {isSelected && <Check className="w-3.5 h-3.5" />}
@@ -247,7 +254,10 @@ export function Pricing() {
                             Implantação
                           </span>
                           <span className="text-sm font-medium text-white/80">
-                            a partir de <span className="font-bold text-white">R$ {plan.setupFee}</span>
+                            a partir de{" "}
+                            <span className="font-bold text-white">
+                              R$ {plan.setupFee}
+                            </span>
                           </span>
                         </div>
 
@@ -255,12 +265,16 @@ export function Pricing() {
                           <span className="text-[11px] text-white/50 uppercase tracking-widest font-semibold mb-1">
                             Mensalidade
                           </span>
+                          <span className="text-sm font-medium text-white/80">
+                            a partir de{" "}
+                            <span className="font-bold text-white"></span>
+                          </span>
                           <div className="flex items-baseline gap-1">
                             <span className="text-sm text-white/50">R$</span>
                             <span
                               className={cn(
                                 "text-4xl font-black tracking-tight",
-                                isSelected ? "text-primary" : "text-white"
+                                isSelected ? "text-primary" : "text-white",
                               )}
                             >
                               {Math.floor(plan.monthlyFee)}
@@ -269,13 +283,15 @@ export function Pricing() {
                               <span
                                 className={cn(
                                   "text-sm font-bold leading-none",
-                                  isSelected ? "text-primary" : "text-white"
+                                  isSelected ? "text-primary" : "text-white",
                                 )}
                               >
                                 ,{(plan.monthlyFee % 1).toFixed(2).substring(2)}
                               </span>
                             </div>
-                            <span className="text-xs text-white/40 ml-1">/mês</span>
+                            <span className="text-xs text-white/40 ml-1">
+                              /mês
+                            </span>
                           </div>
                         </div>
 
@@ -293,11 +309,14 @@ export function Pricing() {
                       <div className="flex-1">
                         <ul className="space-y-4">
                           {plan.features.map((feature, idx) => (
-                            <li key={idx} className="text-[13.5px] text-white/80 flex items-start gap-3">
+                            <li
+                              key={idx}
+                              className="text-[13.5px] text-white/80 flex items-start gap-3"
+                            >
                               <Check
                                 className={cn(
                                   "w-4 h-4 mt-0.5 flex-shrink-0",
-                                  isSelected ? "text-primary" : "text-white/30"
+                                  isSelected ? "text-primary" : "text-white/30",
                                 )}
                               />
                               <span className="leading-snug">{feature}</span>
@@ -307,7 +326,9 @@ export function Pricing() {
                           {plan.highlightFeature && (
                             <li className="text-[13.5px] text-primary flex items-start gap-3 mt-5 pt-5 border-t border-white/5">
                               <Star className="w-4 h-4 mt-0.5 flex-shrink-0 fill-primary" />
-                              <span className="leading-snug font-medium">{plan.highlightFeature}</span>
+                              <span className="leading-snug font-medium">
+                                {plan.highlightFeature}
+                              </span>
                             </li>
                           )}
                         </ul>
@@ -333,7 +354,7 @@ export function Pricing() {
                       key={idx}
                       className={cn(
                         "w-full px-6 py-5 rounded-2xl flex items-center gap-5 transition-colors border",
-                        "bg-[#0E1015] border-white/5 hover:border-white/10 hover:bg-[#13161C]"
+                        "bg-[#0E1015] border-white/5 hover:border-white/10 hover:bg-[#13161C]",
                       )}
                     >
                       {/* Checkbox / Lock Icon */}
@@ -342,10 +363,12 @@ export function Pricing() {
                           "w-6 h-6 rounded-[6px] flex items-center justify-center flex-shrink-0 transition-all",
                           isMandatory
                             ? "border border-[#D4AF37] text-[#D4AF37]"
-                            : "border border-white/20 bg-transparent text-transparent"
+                            : "border border-white/20 bg-transparent text-transparent",
                         )}
                       >
-                        {isMandatory ? <Lock className="w-[14px] h-[14px]" /> : null}
+                        {isMandatory ? (
+                          <Lock className="w-[14px] h-[14px]" />
+                        ) : null}
                       </div>
 
                       {/* Texts */}
@@ -391,7 +414,10 @@ export function Pricing() {
 
                 <div className="space-y-4 mb-10">
                   {selectedPlan.features.map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-3 text-sm text-white/70">
+                    <div
+                      key={idx}
+                      className="flex items-start gap-3 text-sm text-white/70"
+                    >
                       <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary mt-0.5">
                         <Check className="w-3 h-3" />
                       </div>
@@ -403,7 +429,9 @@ export function Pricing() {
                       <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 text-primary mt-0.5 border border-primary/30">
                         <Star className="w-3 h-3 fill-primary" />
                       </div>
-                      <span className="leading-relaxed">{selectedPlan.highlightFeature}</span>
+                      <span className="leading-relaxed">
+                        {selectedPlan.highlightFeature}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -411,7 +439,9 @@ export function Pricing() {
                 <div className="bg-[#181B24] p-6 rounded-2xl border border-white/5 mb-8">
                   <div className="space-y-5">
                     <div className="flex justify-between items-center">
-                      <div className="text-sm text-white/50">Implantação Estimada</div>
+                      <div className="text-sm text-white/50">
+                        Implantação Estimada
+                      </div>
                       <div className="text-lg font-bold text-white text-right">
                         R$ {selectedPlan.setupFee.toLocaleString("pt-BR")}
                       </div>
@@ -420,17 +450,25 @@ export function Pricing() {
                     <div className="w-full h-px bg-white/5" />
 
                     <div className="flex justify-between items-center">
-                      <div className="text-sm text-white/50">Mensalidade Estimada</div>
+                      <div className="text-sm text-white/50">
+                        Mensalidade Estimada
+                      </div>
                       <div className="text-2xl font-bold text-white flex items-baseline gap-1 text-right">
-                        R$ {selectedPlan.monthlyFee.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
-                        <span className="text-xs text-white/40 font-normal">/mês</span>
+                        R${" "}
+                        {selectedPlan.monthlyFee.toLocaleString("pt-BR", {
+                          minimumFractionDigits: 2,
+                        })}
+                        <span className="text-xs text-white/40 font-normal">
+                          /mês
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   {billingCycle === "yearly" && (
                     <div className="mt-6 bg-green-500/10 border border-green-500/20 text-green-400 p-3 rounded-xl text-xs font-medium leading-relaxed text-center">
-                      Plano anual com 2 primeiros meses sem mensalidade (paga só 10 meses).
+                      Plano anual com 2 primeiros meses sem mensalidade (paga
+                      apenas 10 meses).
                     </div>
                   )}
                 </div>
@@ -442,7 +480,8 @@ export function Pricing() {
                   Solicitar Orçamento <MessageSquare className="w-6 h-6" />
                 </button>
                 <p className="text-center text-[11px] text-white/30 mt-4 leading-relaxed px-4">
-                  Valores estimados. O orçamento final será enviado após análise do projeto.
+                  Valores estimados. O orçamento final será enviado após análise
+                  do projeto.
                 </p>
               </div>
             </div>
