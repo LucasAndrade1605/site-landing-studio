@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Phone, Mail } from "lucide-react";
+
+import { Phone, Mail} from "lucide-react";
 
 export function Footer() {
   return (
@@ -44,6 +44,7 @@ export function Footer() {
               contato@landingstudio.com.br
             </a>
           </div>
+
         </div>
 
         <div className="pt-8 border-t border-white/5 flex justify-center items-center gap-4 text-sm text-white/40">

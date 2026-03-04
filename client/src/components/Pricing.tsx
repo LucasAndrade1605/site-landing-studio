@@ -188,22 +188,21 @@ export function Pricing() {
       const plan = plans.find((p) => p.id === selectedPlanId);
       message = `Olá! Gostaria de um orçamento para o *${plan?.title}*.\n\nItens inclusos:\n${plan?.features.map((f) => `• ${f}`).join("\n")}\n\nFaixa de valor estimada: R$ ${totalMin.toLocaleString("pt-BR")} a R$ ${totalMax.toLocaleString("pt-BR")} + R$ 55,00/mês (Hospedagem)`;
     } else {
-      const selectedNames = items
-        .filter((i) => selectedItems.includes(i.id))
-        .map((i) => i.title)
-        .join(", ");
       message = `Olá! Montei meu pacote personalizado de landing page:\n\nItens:\n${items
         .filter((i) => selectedItems.includes(i.id))
         .map((i) => `• ${i.title}`)
-        .join(
-          "\n",
-        )}\n\nFaixa de valor estimada: R$ ${totalMin.toLocaleString("pt-BR")} a R$ ${totalMax.toLocaleString("pt-BR")}${showHostingFee ? " + R$ 55,00/mês (Hospedagem)" : ""}`;
+        .join("\n")}\n\nFaixa de valor estimada: R$ ${totalMin.toLocaleString("pt-BR")} a R$ ${totalMax.toLocaleString(
+        "pt-BR",
+      )}${showHostingFee ? " + R$ 55,00/mês (Hospedagem)" : ""}`;
     }
 
-    window.open(
-      `https://wa.me/5567993498440?text=${encodeURIComponent(message)}`,
-      "_blank",
-    );
+    const url = `https://wa.me/5567993498440?text=${encodeURIComponent(message)}`;
+
+    // 1) dispara a conversão no Google Ads
+    if (typeof window.gtag_report_conversion === "function") {
+      window.gtag_report_conversion(url);
+    }
+
   };
 
   return (
