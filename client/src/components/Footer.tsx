@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 
 export function Footer() {
   return (
@@ -35,6 +35,13 @@ export function Footer() {
             >
               <Phone className="w-5 h-5" />
               (67) 9 9349-8440
+            </a>
+            <a
+              href="mailto:contato@landingpage.com.br"
+              className="text-white/60 hover:text-primary transition-colors flex items-center gap-2"
+            >
+              <Mail className="w-5 h-5" />
+              contato@landingstudio.com.br
             </a>
           </div>
         </div>
