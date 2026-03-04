@@ -1,0 +1,53 @@
+Quero que você redesenhe a sessão de planos do meu site (a que tem planos recomendados + resumo do pedido), mantendo o mesmo estilo visual (fundo escuro, destaque amarelo/dourado, mesma tipografia e hierarquia), mas com este novo modelo de cobrança:
+
+1. Estrutura geral
+Manter:
+Título da sessão de planos
+Dois cards principais de planos (recomendados)
+Card de “Resumo do Pedido” à direita
+2. Modelo de preço dos planos
+Substituir valores antigos por:
+
+Plano Essencial (Mensal):
+
+Título: Plano Essencial
+Implantação: “Implantação a partir de R$ 400”
+Mensalidade: “Mensalidade a partir de R$ 89,90/mês”
+Benefícios (exemplo): Landing Page Simples, Copywriting Básico, Domínio e Hospedagem.
+Plano Profissional (Mensal):
+
+Título: Plano Profissional
+Implantação: “Implantação a partir de R$ 500”
+Mensalidade: “Mensalidade a partir de R$ 149,90/mês”
+Benefícios: Landing estratégica, Copy completa, Integrações, Domínio e Hospedagem.
+Selo: “Recomendado” ou “Mais Vendido”.
+3. Planos anuais (2 meses sem mensalidade)
+Criar cards de plano anual para cada um:
+
+Plano Essencial – Anual:
+
+Título: Plano Essencial – Anual
+Badge: “2 primeiros meses sem mensalidade”
+Implantação: a partir de R$ 400
+Texto explicando: “Plano anual: você só paga 10 de 12 mensalidades. 2 primeiros meses sem mensalidade.”
+Plano Profissional – Anual:
+
+Título: Plano Profissional – Anual
+Badge: “2 MESES GRÁTIS” ou “Melhor custo-benefício”
+Implantação: a partir de R$ 500
+Texto: “Plano anual com 2 primeiros meses sem mensalidade. Paga apenas 10 de 12 mensalidades de R$ 149,90.”
+4. Resumo do Pedido (card lateral)
+Atualizar para mostrar:
+
+Nome do plano escolhido (Essencial / Profissional, Mensal / Anual)
+Implantação estimada: a partir de R$ 400 ou R$ 500
+Mensalidade estimada: a partir de R$ 89,90 ou R$ 149,90
+Para anual, texto: “Plano anual com 2 primeiros meses sem mensalidade (paga só 10 meses).”
+Manter botão: “Solicitar Orçamento”
+Rodapé: “Valores estimados. O orçamento final será enviado após análise do projeto.”
+5. Estilo
+Manter o mesmo layout escuro, com cards, ícones de check e destaques em amarelo/dourado.
+Dar bastante destaque visual para:
+“Implantação a partir de R$ 400”
+“Mensalidade a partir de R$ 89,90/mês”
+“2 primeiros meses sem mensalidade” nos cards anuais.

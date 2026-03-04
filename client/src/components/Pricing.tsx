@@ -1,208 +1,106 @@
 import { useState } from "react";
-import { MessageSquare, Check, ArrowRight, Sparkles, Lock } from "lucide-react";
+import { MessageSquare, Check, Sparkles, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface PriceItem {
-  id: string;
-  title: string;
-  description: string;
-  priceMin: number;
-  priceMax: number;
-  features: string[];
-  isBase?: boolean;
-}
+type BillingCycle = "monthly" | "yearly";
 
-interface PredefinedPlan {
+interface Plan {
   id: string;
   title: string;
-  description: string;
-  priceMin: number;
-  priceMax: number;
-  maxTotalValue: number;
+  setupFee: number;
+  monthlyFee: number;
   features: string[];
-  includedItems: string[];
-  discountColor: string;
+  popular?: boolean;
+  highlightFeature?: string;
+  yearlyBadge?: string;
+  yearlyText?: string;
 }
 
 export function Pricing() {
-  const [selectedMode, setSelectedMode] = useState<"custom" | "plan">("plan");
-  const [selectedItems, setSelectedItems] = useState<string[]>([
-    "landing-page",
-  ]);
-  const [selectedPlanId, setSelectedPlanId] = useState<string | null>(
-    "plan-essencial",
-  );
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
+  const [selectedPlanId, setSelectedPlanId] = useState<string>("profissional");
 
-  const items: PriceItem[] = [
+  const plans: Plan[] = [
     {
-      id: "landing-page",
-      title: "Landing Page Simples",
-      description: "Estrutura + Design + Responsivo",
-      priceMin: 850,
-      priceMax: 1500,
-      features: [
-        "Design exclusivo",
-        "Responsivo (Mobile-first)",
-        "Até 5 seções",
-      ],
-      isBase: true,
-    },
-    {
-      id: "copywriting",
-      title: "Copywriting Completo",
-      description: "Textos persuasivos focados em venda",
-      priceMin: 250,
-      priceMax: 550,
-      features: [
-        "Estrutura de oferta",
-        "Headlines magnéticas",
-        "Gatilhos mentais",
-      ],
-    },
-    {
-      id: "integracoes",
-      title: "Integrações Essenciais",
-      description: "WhatsApp, formulário, e-mail",
-      priceMin: 300,
-      priceMax: 600,
-      features: [
-        "Botão WhatsApp",
-        "Formulário de contato",
-        "Disparo de e-mail",
-      ],
-    },
-    {
-      id: "dominio",
-      title: "Domínio e Hospedagem",
-      description: "Configuração completa",
-      priceMin: 200,
-      priceMax: 400,
-      features: [
-        "Configuração de domínio",
-        "SSL (Site seguro)",
-        "Hospedagem rápida",
-      ],
-    },
-  ];
-
-  const plans: PredefinedPlan[] = [
-    {
-      id: "plan-essencial",
+      id: "essencial",
       title: "Plano Essencial",
-      description: "Para começar com o pé direito",
-      priceMin: 1200,
-      priceMax: 1700,
-      maxTotalValue: 2450,
+      setupFee: 400,
+      monthlyFee: 89.9,
       features: [
-        "Landing Page Simples",
+        "Landing Page Premium",
         "Copywriting Completo",
         "Domínio e Hospedagem",
       ],
-      includedItems: ["landing-page", "copywriting", "dominio"],
-      discountColor: "bg-emerald-500",
+      yearlyBadge: "2 primeiros meses isentos",
+      yearlyText:
+        "Plano anual: você só paga 10 de 12 mensalidades. 2 primeiros meses sem mensalidade.",
     },
     {
-      id: "plan-profissional",
+      id: "profissional",
       title: "Plano Profissional",
-      description: "Para quem quer vender com estratégia",
-      priceMin: 1400,
-      priceMax: 2200,
-      maxTotalValue: 3050,
+      setupFee: 500,
+      monthlyFee: 139.9,
+      popular: true,
       features: [
-        "Landing Page Simples",
+        "Landing Page Premium",
         "Copywriting Completo",
         "Integrações",
         "Domínio e Hospedagem",
       ],
-      includedItems: ["landing-page", "copywriting", "integracoes", "dominio"],
-      discountColor: "bg-purple-500",
+      yearlyBadge: "Melhor custo-benefício",
+      yearlyText:
+        "Plano anual com 2 primeiros meses sem mensalidade. Paga apenas 10 de 12 mensalidades.",
+    },
+    {
+      id: "painel",
+      title: "Profissional + Painel",
+      setupFee: 600,
+      monthlyFee: 189.9,
+      highlightFeature:
+        "Painel Administrativo: Gerenciamento de imagens, cards, valores e texto da página",
+      features: [
+        "Landing Page Premium",
+        "Copywriting Completo",
+        "Integrações",
+        "Domínio e Hospedagem",
+      ],
+      yearlyBadge: "2 Meses Grátis",
+      yearlyText:
+        "Plano anual com 2 primeiros meses sem mensalidade. Paga apenas 10 de 12 mensalidades.",
     },
   ];
 
-  const toggleItem = (id: string) => {
-    if (selectedMode === "plan") {
-      setSelectedMode("custom");
-      setSelectedPlanId(null);
-      const newSelection = ["landing-page"];
-      if (id !== "landing-page") newSelection.push(id);
-      setSelectedItems(newSelection);
-      return;
-    }
-
-    // Não permite desmarcar o item base (landing-page)
-    if (id === "landing-page") {
-      return;
-    }
-
-    if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter((item) => item !== id));
-    } else {
-      setSelectedItems([...selectedItems, id]);
-    }
-  };
-
-  const selectPlan = (planId: string) => {
-    setSelectedMode("plan");
-    setSelectedPlanId(planId);
-    setSelectedItems([]);
-  };
-
-  let totalMin = 0;
-  let totalMax = 0;
-  let currentSelectionTitle = "";
-  let currentSelectionItems: string[] = [];
-  let savings = 0;
-  let showHostingFee = false;
-
-  if (selectedMode === "plan" && selectedPlanId) {
-    const plan = plans.find((p) => p.id === selectedPlanId);
-    if (plan) {
-      totalMin = plan.priceMin;
-      totalMax = plan.priceMax;
-      currentSelectionTitle = plan.title;
-      currentSelectionItems = plan.features;
-      savings = Math.round(
-        ((plan.maxTotalValue - plan.priceMax) / plan.maxTotalValue) * 100,
-      );
-      // Todos os planos incluem hospedagem
-      showHostingFee = true;
-    }
-  } else {
-    currentSelectionTitle = "Personalizado";
-    selectedItems.forEach((itemId) => {
-      const item = items.find((i) => i.id === itemId);
-      if (item) {
-        totalMin += item.priceMin;
-        totalMax += item.priceMax;
-        currentSelectionItems.push(item.title);
-      }
-    });
-    // Mostra taxa de hospedagem se dominio estiver selecionado
-    showHostingFee = selectedItems.includes("dominio");
-  }
+  const selectedPlan = plans.find((p) => p.id === selectedPlanId) || plans[1];
 
   const handleWhatsAppClick = () => {
-    let message = "";
-
-    if (selectedMode === "plan" && selectedPlanId) {
-      const plan = plans.find((p) => p.id === selectedPlanId);
-      message = `Olá! Gostaria de um orçamento para o *${plan?.title}*.\n\nItens inclusos:\n${plan?.features.map((f) => `• ${f}`).join("\n")}\n\nFaixa de valor estimada: R$ ${totalMin.toLocaleString("pt-BR")} a R$ ${totalMax.toLocaleString("pt-BR")} + R$ 55,00/mês (Hospedagem)`;
-    } else {
-      message = `Olá! Montei meu pacote personalizado de landing page:\n\nItens:\n${items
-        .filter((i) => selectedItems.includes(i.id))
-        .map((i) => `• ${i.title}`)
-        .join("\n")}\n\nFaixa de valor estimada: R$ ${totalMin.toLocaleString("pt-BR")} a R$ ${totalMax.toLocaleString(
-        "pt-BR",
-      )}${showHostingFee ? " + R$ 55,00/mês (Hospedagem)" : ""}`;
+    const isYearly = billingCycle === "yearly";
+    const planName = `${selectedPlan.title}${isYearly ? " - Anual" : " - Mensal"}`;
+    const monthlyFormatted = selectedPlan.monthlyFee.toLocaleString("pt-BR", {
+      minimumFractionDigits: 2,
+    });
+    
+    let message = `Olá! Gostaria de um orçamento para o *${planName}*.\n\n`;
+    message += `*Implantação:* a partir de R$ ${selectedPlan.setupFee.toLocaleString("pt-BR")}\n`;
+    message += `*Mensalidade:* a partir de R$ ${monthlyFormatted}/mês\n\n`;
+    if (isYearly) {
+      message += `*Condição Anual:* 2 primeiros meses isentos (paga 10 de 12)\n\n`;
+    }
+    
+    message += `Itens inclusos:\n`;
+    selectedPlan.features.forEach((f) => {
+      message += `• ${f}\n`;
+    });
+    if (selectedPlan.highlightFeature) {
+      message += `• ${selectedPlan.highlightFeature}\n`;
     }
 
-    const url = `https://wa.me/5567993498440?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/5567993498440?text=${encodeURIComponent(
+      message,
+    )}`;
 
-    // 1) dispara a conversão no Google Ads
     if (typeof window.gtag_report_conversion === "function") {
       window.gtag_report_conversion(url);
     }
-
   };
 
   return (
@@ -210,12 +108,11 @@ export function Pricing() {
       id="pricing"
       className="py-24 bg-[#050608] relative overflow-hidden text-white"
     >
-      {/* Background Gradients similar to Features section */}
       <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="text-center mb-16 max-w-2xl mx-auto">
+        <div className="text-center mb-12 max-w-2xl mx-auto">
           <span className="text-primary font-medium tracking-widest text-sm uppercase mb-4 block">
             Investimento
           </span>
@@ -223,210 +120,145 @@ export function Pricing() {
             Escolha o plano ideal para{" "}
             <span className="text-primary">sua estratégia</span>
           </h2>
-          <p className="text-lg text-white/60">
-            Pacotes fechados com desconto ou montagem personalizada conforme sua
-            necessidade.
-          </p>
+          
+          {/* Toggle Mensal/Anual */}
+          <div className="flex items-center justify-center mt-8">
+            <div className="bg-[#12141B] p-1.5 rounded-full border border-white/10 inline-flex">
+              <button
+                onClick={() => setBillingCycle("monthly")}
+                className={cn(
+                  "px-6 py-2.5 rounded-full text-sm font-semibold transition-all",
+                  billingCycle === "monthly"
+                    ? "bg-primary text-black shadow-lg"
+                    : "text-white/60 hover:text-white"
+                )}
+              >
+                Mensal
+              </button>
+              <button
+                onClick={() => setBillingCycle("yearly")}
+                className={cn(
+                  "px-6 py-2.5 rounded-full text-sm font-semibold transition-all relative",
+                  billingCycle === "yearly"
+                    ? "bg-primary text-black shadow-lg"
+                    : "text-white/60 hover:text-white"
+                )}
+              >
+                Anual
+                <span className="absolute -top-3 -right-3 bg-green-500 text-white text-[10px] px-2 py-0.5 rounded-full border border-green-400 font-bold whitespace-nowrap animate-pulse">
+                  2 MESES OFF
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8">
-          {/* Left Column: Options */}
-          <div className="lg:col-span-8 space-y-8">
-            {/* 1. Plans Section */}
-            <div>
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="bg-[#12141B] border border-white/10 text-primary w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold">
-                  1
-                </span>
-                Planos Recomendados
-              </h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                {plans.map((plan) => {
-                  const discount = Math.round(
-                    ((plan.maxTotalValue - plan.priceMax) /
-                      plan.maxTotalValue) *
-                      100,
-                  );
+          {/* Planos */}
+          <div className="lg:col-span-8">
+            <div className="grid md:grid-cols-3 gap-6">
+              {plans.map((plan) => {
+                const isSelected = selectedPlanId === plan.id;
+                const isYearly = billingCycle === "yearly";
 
-                  return (
-                    <button
-                      key={plan.id}
-                      onClick={() => selectPlan(plan.id)}
-                      className={cn(
-                        "text-left p-6 cursor-pointer rounded-[2rem] border transition-all relative overflow-hidden group hover:-translate-y-1 duration-300",
-                        selectedMode === "plan" && selectedPlanId === plan.id
-                          ? "border-primary/50 bg-[#12141B] shadow-[0_0_30px_-10px_rgba(255,235,122,0.15)]"
-                          : "border-white/5 bg-[#12141B]/50 hover:bg-[#12141B] hover:border-white/10",
-                      )}
-                    >
-                      {/* Selection Indicator */}
-                      <div
-                        className={cn(
-                          "absolute top-6 right-6 w-6 h-6 rounded-full border flex items-center justify-center transition-colors",
-                          selectedMode === "plan" && selectedPlanId === plan.id
-                            ? "border-primary bg-primary text-black"
-                            : "border-white/20",
-                        )}
-                      >
-                        {selectedMode === "plan" &&
-                          selectedPlanId === plan.id && (
-                            <Check className="w-4 h-4" />
-                          )}
-                      </div>
-
-                      {/* Discount Badge */}
-                      <div className="absolute top-0 right-0">
-                        <div className="bg-gradient-to-bl from-primary to-secondary text-black text-[10px] font-bold px-3 py-1 rounded-bl-xl shadow-lg transform translate-x-[1px] -translate-y-[1px]">
-                          ECONOMIZE {discount}%
+                return (
+                  <button
+                    key={plan.id}
+                    onClick={() => setSelectedPlanId(plan.id)}
+                    className={cn(
+                      "text-left p-6 cursor-pointer rounded-[2rem] border transition-all relative overflow-hidden group hover:-translate-y-1 duration-300 flex flex-col h-full",
+                      isSelected
+                        ? "border-primary/50 bg-[#12141B] shadow-[0_0_30px_-10px_rgba(255,235,122,0.15)]"
+                        : "border-white/5 bg-[#12141B]/50 hover:bg-[#12141B] hover:border-white/10"
+                    )}
+                  >
+                    {plan.popular && !isYearly && (
+                      <div className="absolute top-0 inset-x-0 flex justify-center">
+                        <div className="bg-gradient-to-r from-primary to-secondary text-black text-[10px] font-bold px-4 py-1 rounded-b-xl shadow-lg uppercase tracking-wider">
+                          Mais Vendido
                         </div>
                       </div>
+                    )}
+                    
+                    {isYearly && plan.yearlyBadge && (
+                      <div className="absolute top-0 inset-x-0 flex justify-center z-10">
+                        <div className="bg-green-500 text-white text-[10px] font-bold px-4 py-1 rounded-b-xl shadow-lg uppercase tracking-wider">
+                          {plan.yearlyBadge}
+                        </div>
+                      </div>
+                    )}
 
-                      <h4 className="text-xl font-bold text-white mb-2 pr-8">
+                    <div className="flex items-center justify-between mb-4 mt-4">
+                      <h4 className="text-lg font-bold text-white leading-tight pr-2">
                         {plan.title}
                       </h4>
-                      <p className="text-sm text-white/60 mb-6 min-h-[40px]">
-                        {plan.description}
-                      </p>
+                      <div
+                        className={cn(
+                          "w-5 h-5 rounded-full border flex items-center justify-center transition-colors flex-shrink-0",
+                          isSelected
+                            ? "border-primary bg-primary text-black"
+                            : "border-white/20"
+                        )}
+                      >
+                        {isSelected && <Check className="w-3 h-3" />}
+                      </div>
+                    </div>
 
-                      <div className="mb-6">
-                        <div className="text-sm text-white/40 line-through mb-1">
-                          de R$ {plan.maxTotalValue.toLocaleString("pt-BR")}
+                    <div className="mb-4 space-y-2 flex-grow-0">
+                      <div className="bg-white/5 rounded-xl p-4 border border-white/5 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-white/20" />
+                        <div className="text-[11px] text-white/50 uppercase tracking-wider font-semibold mb-1">
+                          Implantação
                         </div>
-                        <div className="text-2xl font-bold text-white">
-                          <span className="text-lg font-normal text-white/60">
-                            até
-                          </span>{" "}
-                          R$ {plan.priceMax.toLocaleString("pt-BR")}
+                        <div className="text-white font-medium text-sm">
+                          a partir de <span className="text-primary font-bold text-lg">R$ {plan.setupFee}</span>
                         </div>
                       </div>
 
+                      <div className="bg-white/5 rounded-xl p-4 border border-white/5 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-primary/50" />
+                        <div className="text-[11px] text-white/50 uppercase tracking-wider font-semibold mb-1">
+                          Mensalidade
+                        </div>
+                        <div className="text-white font-medium text-sm">
+                          a partir de <span className="text-primary font-bold text-lg">R$ {plan.monthlyFee.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</span><span className="text-white/50 text-xs">/mês</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {isYearly && (
+                      <div className="mb-4 text-xs text-green-400 bg-green-500/10 p-3 rounded-lg border border-green-500/20 font-medium leading-relaxed">
+                        {plan.yearlyText}
+                      </div>
+                    )}
+
+                    <div className="mt-auto">
+                      <div className="h-px w-full bg-white/10 my-4" />
                       <ul className="space-y-3">
                         {plan.features.map((feature, idx) => (
                           <li
                             key={idx}
-                            className="text-sm text-white/80 flex items-center gap-3"
+                            className="text-xs text-white/80 flex items-start gap-2"
                           >
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                            {feature}
+                            <div className="w-1.5 h-1.5 rounded-full bg-white/20 mt-1.5 flex-shrink-0" />
+                            <span className="leading-relaxed">{feature}</span>
                           </li>
                         ))}
-                      </ul>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* 2. Custom Section */}
-            <div>
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3 mt-12">
-                <span className="bg-[#12141B] border border-white/10 text-primary w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold">
-                  2
-                </span>
-                Ou monte do seu jeito
-              </h3>
-              <div className="space-y-3">
-                {items.map((item) => {
-                  const isSelected =
-                    selectedMode === "custom" &&
-                    selectedItems.includes(item.id);
-                  const isBase = item.isBase;
-
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => toggleItem(item.id)}
-                      disabled={isBase}
-                      className={cn(
-                        "w-full text-left p-5 rounded-2xl border transition-all flex items-center justify-between group",
-                        isBase
-                          ? "border-primary/30 bg-[#12141B] text-white cursor-not-allowed"
-                          : isSelected
-                            ? "border-primary/50 bg-[#12141B] text-white shadow-lg cursor-pointer"
-                            : "border-white/5 bg-[#12141B]/30 hover:bg-[#12141B]/80 hover:border-white/10 text-white cursor-pointer",
-                      )}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div
-                          className={cn(
-                            "w-5 h-5 rounded-md border flex items-center justify-center transition-colors flex-shrink-0",
-                            isBase
-                              ? "border-primary/50 bg-primary/20 text-primary"
-                              : isSelected
-                                ? "border-primary bg-primary text-black"
-                                : "border-white/20 bg-transparent",
-                          )}
-                        >
-                          {isBase ? (
-                            <Lock className="w-3.5 h-3.5" />
-                          ) : (
-                            isSelected && <Check className="w-3.5 h-3.5" />
-                          )}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h4
-                              className={cn(
-                                "font-semibold transition-colors",
-                                isBase
-                                  ? "text-white"
-                                  : "text-white group-hover:text-primary",
-                              )}
-                            >
-                              {item.title}
-                            </h4>
-                            {isBase && (
-                              <span className="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-full font-bold">
-                                OBRIGATÓRIO
-                              </span>
-                            )}
-                          </div>
-                          <p
-                            className={cn(
-                              "text-sm transition-colors",
-                              isBase
-                                ? "text-white/50"
-                                : isSelected
-                                  ? "text-white/60"
-                                  : "text-white/40",
-                            )}
-                          >
-                            {item.description}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div
-                          className={cn(
-                            "font-bold text-sm",
-                            isBase
-                              ? "text-primary"
-                              : isSelected
-                                ? "text-primary"
-                                : "text-white",
-                          )}
-                        >
-                          R$ {item.priceMin} - {item.priceMax}
-                        </div>
-                        {item.id === "dominio" && (
-                          <div
-                            className={cn(
-                              "text-[10px]",
-                              isSelected ? "text-white/60" : "text-white/30",
-                            )}
-                          >
-                            + R$ 55/mês
-                          </div>
+                        {plan.highlightFeature && (
+                          <li className="text-xs text-primary flex items-start gap-2 bg-primary/5 p-2 rounded-lg border border-primary/20">
+                            <Star className="w-3 h-3 mt-0.5 flex-shrink-0 fill-primary" />
+                            <span className="leading-relaxed font-medium">{plan.highlightFeature}</span>
+                          </li>
                         )}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
+                      </ul>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          {/* Right Column: Sticky Summary */}
+          {/* Resumo do Pedido */}
           <div className="lg:col-span-4">
             <div className="sticky top-32">
               <div className="bg-[#12141B] rounded-[2rem] p-8 text-white shadow-2xl relative overflow-hidden border border-white/5">
@@ -437,46 +269,56 @@ export function Pricing() {
                 <h3 className="text-xs font-bold text-primary mb-2 uppercase tracking-widest">
                   Resumo do Pedido
                 </h3>
-                <div className="text-2xl font-bold mb-6 text-white">
-                  {currentSelectionTitle}
+                <div className="text-xl font-bold mb-6 text-white leading-tight">
+                  {selectedPlan.title} <br/>
+                  <span className="text-base font-medium text-white/60">
+                    {billingCycle === "monthly" ? "(Mensal)" : "(Anual)"}
+                  </span>
                 </div>
 
                 <div className="space-y-4 mb-8">
-                  {currentSelectionItems.map((item, idx) => (
+                  {selectedPlan.features.map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center gap-3 text-sm text-white/80"
+                      className="flex items-start gap-3 text-sm text-white/80"
                     >
-                      <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary">
+                      <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary mt-0.5">
                         <Check className="w-3 h-3" />
                       </div>
-                      {item}
+                      <span className="leading-relaxed">{item}</span>
                     </div>
                   ))}
+                  {selectedPlan.highlightFeature && (
+                    <div className="flex items-start gap-3 text-sm text-primary font-medium">
+                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 text-primary mt-0.5 border border-primary/30">
+                        <Star className="w-3 h-3 fill-primary" />
+                      </div>
+                      <span className="leading-relaxed">{selectedPlan.highlightFeature}</span>
+                    </div>
+                  )}
                 </div>
 
-                <div className="border-t border-white/10 pt-6 mb-8">
-                  <div className="flex justify-between items-end mb-2">
-                    <div className="text-sm text-white/60">Investimento</div>
-                    {savings > 0 && (
-                      <div className="text-[10px] font-bold bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">
-                        {savings}% OFF
-                      </div>
-                    )}
-                  </div>
-                  <div className="text-3xl font-bold text-white">
-                    <div className="text-sm text-white/40 mt-1">
-                      de R$ {totalMin.toLocaleString("pt-BR")}
+                <div className="border-t border-white/10 pt-6 mb-8 space-y-4">
+                  <div>
+                    <div className="text-sm text-white/60 mb-1">Implantação Estimada</div>
+                    <div className="text-2xl font-bold text-white">
+                      <span className="text-sm text-white/40 font-normal mr-1">a partir de</span>
+                      R$ {selectedPlan.setupFee.toLocaleString("pt-BR")}
                     </div>
-                    <span className="text-lg text-white/40 font-normal">
-                      até
-                    </span>{" "}
-                    R$ {totalMax.toLocaleString("pt-BR")}
                   </div>
-                  {showHostingFee && (
-                    <div className="text-xs text-white/40 mt-2 flex items-center gap-1.5">
-                      <div className="w-1 h-1 bg-primary rounded-full" />+ R$
-                      55,00/mês (Hospedagem)
+                  
+                  <div>
+                    <div className="text-sm text-white/60 mb-1">Mensalidade Estimada</div>
+                    <div className="text-2xl font-bold text-white flex items-baseline gap-1">
+                      <span className="text-sm text-white/40 font-normal">a partir de</span>
+                      R$ {selectedPlan.monthlyFee.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}
+                      <span className="text-sm text-white/40 font-normal">/mês</span>
+                    </div>
+                  </div>
+
+                  {billingCycle === "yearly" && (
+                    <div className="bg-green-500/10 border border-green-500/20 text-green-400 p-3 rounded-xl text-xs font-medium mt-4 leading-relaxed">
+                      Plano anual com 2 primeiros meses sem mensalidade (paga só 10 meses).
                     </div>
                   )}
                 </div>
@@ -487,7 +329,7 @@ export function Pricing() {
                 >
                   Solicitar Orçamento <MessageSquare className="w-5 h-5" />
                 </button>
-                <p className="text-center text-xs text-white/30 mt-4">
+                <p className="text-center text-xs text-white/30 mt-4 leading-relaxed">
                   Valores estimados. O orçamento final será enviado após análise
                   do projeto.
                 </p>

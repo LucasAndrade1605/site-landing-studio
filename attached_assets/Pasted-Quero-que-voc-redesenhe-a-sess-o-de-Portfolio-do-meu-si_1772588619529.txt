@@ -1,0 +1,71 @@
+Quero que você redesenhe a sessão de Portfolio do meu site (a que tem planos recomendados + resumo do pedido), mantendo o mesmo estilo visual (fundo escuro, destaque amarelo/dourado, mesma tipografia e hierarquia), mas com este novo modelo de cobrança:
+
+Estrutura geral
+Manter:
+Título da sessão
+Três cards principais de planos (recomendados)
+Card de “Resumo do Pedido” à direita
+
+Modelo de preço dos planos
+
+Plano Essencial (Mensal):
+
+Título: Plano Essencial
+Implantação: “Implantação a partir de R$ 400”
+Mensalidade: “Mensalidade a partir de R$ 89,90/mês”
+Benefícios (exemplo): Landing Page Premium, Copywriting Completo, Domínio e Hospedagem.
+
+Plano Profissional (Mensal):
+
+Título: Plano Profissional
+Implantação: “Implantação a partir de R$ 500”
+Mensalidade: “Mensalidade a partir de R$ 139,90/mês”
+Benefícios: Landing Page Premium, Copywriting Completo, Integrações, Domínio e Hospedagem.
+Selo: “Recomendado” ou “Mais Vendido”.
+
+Plano com Painel Administrativo (Mensal):
+
+Título: Plano Profissional + Painel Administrativo
+Implantação: “Implantação a partir de R$ 600”
+Mensalidade: “Mensalidade a partir de R$ 189,90/mês”
+Benefícios: Landing Page Premium, Copywriting Completo, Integrações, Domínio e Hospedagem, Painel Administrativo.
+
+Planos anuais (2 meses sem mensalidade)
+Criar cards de plano anual para cada um:
+Plano Essencial – Anual:
+
+Título: Plano Essencial – Anual
+Badge: “2 primeiros meses isentos”
+Implantação: a partir de R$ 400
+Texto explicando: “Plano anual: você só paga 10 de 12 mensalidades. 2 primeiros meses sem mensalidade.”
+
+Plano Profissional – Anual:
+
+Título: Plano Profissional – Anual
+Badge: “2 MESES GRÁTIS” ou “Melhor custo-benefício”
+Implantação: a partir de R$ 500
+Texto: “Plano anual com 2 primeiros meses sem mensalidade. Paga apenas 10 de 12 mensalidades.”
+
+Plano Painel Administrativo – Anual:
+
+Título: Plano Profissional + Painel Administrativo – Anual
+Badge: “2 MESES GRÁTIS” ou “Melhor custo-benefício”
+Implantação: a partir de R$ 600
+Texto: “Plano anual com 2 primeiros meses sem mensalidade. Paga apenas 10 de 12 mensalidades. Inclui Painel Administrativo para gerenciamento de imagens, cards, valores e texto da página.”
+
+Resumo do Pedido (card lateral)
+Atualizar para mostrar:
+Nome do plano escolhido (Essencial / Profissional / Painel Administrativo, Mensal / Anual)
+Implantação estimada: a partir de R$ 400, R$ 500 ou R$ 600
+Mensalidade estimada: a partir de R$ 89,90, R$ 139,90 ou R$ 189,90
+Para anual, texto: “Plano anual com 2 primeiros meses sem mensalidade (paga só 10 meses).”
+Manter botão: “Solicitar Orçamento”
+Rodapé: “Valores estimados. O orçamento final será enviado após análise do projeto.”
+
+Estilo
+Manter o mesmo layout escuro, com cards, ícones de check e destaques em amarelo/dourado.
+Dar bastante destaque visual para:
+“Implantação a partir de R$ 400”
+“Mensalidade a partir de R$ 89,90/mês”
+“2 primeiros meses sem mensalidade” nos cards anuais.
+Dar também destaque para o benefício: “Painel Administrativo: Gerenciamento de imagens, cards, valores e texto da página” no plano correspondente.
