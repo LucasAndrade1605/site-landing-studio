@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import logoCompleta from "@/assets/logo_completa.png";
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -42,21 +43,22 @@ export function Navigation() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
+        "fixed top-[-20px] left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
         scrolled
-          ? "bg-[#050608]/80 backdrop-blur-xl border-white/5 py-4"
-          : "bg-transparent py-6",
+          ? "bg-[#050608]/80 backdrop-blur-xl border-white/5 py-1"
+          : "bg-transparent py-2",
       )}
     >
-      <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
+      <div className="container mt-[-10px] mb-[-15px] mx-auto px-6 max-w-7xl flex items-center justify-between">
         <Link
           href="/"
           className="text-xl font-bold tracking-tighter text-white flex items-center gap-2 hover:opacity-90 transition-opacity"
         >
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
-            Landing
-          </span>{" "}
-          Studio
+          <img
+            src={logoCompleta}
+            alt="Landing Studio"
+            className="h-48 w-auto ml-[-25px] mb-[-35px] w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Nav */}

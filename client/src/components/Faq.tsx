@@ -11,7 +11,7 @@ const faqData: FAQItem[] = [
   {
     question: "Quanto tempo leva para criar uma landing page?",
     answer:
-      "Dependendo da complexidade do projeto e do nível de personalização desejado. Projetos mais simples podem ser entregues em até 5 dias úteis.",
+      "Depende da complexidade do projeto e do nível de personalização desejado. Projetos simples podem ser entregues em até 5 dias úteis.",
   },
   {
     question: "Vocês fazem a hospedagem da página?",
@@ -19,9 +19,9 @@ const faqData: FAQItem[] = [
     "Sim! Nós cuidamos de tudo para você: domínio, hospedagem e certificado SSL, tudo incluso na mensalidade.",
   },
   {
-    question: "Posso solicitar alterações após a entrega?",
+    question: "Alterações de conteúdo ou funcionalidades estão incluídas na mensalidade?",
     answer:
-      "A mensalidade abrange a integridade, segurança e disponibilidade da página. Não inclui alterações de conteúdo ou layout. Qualquer ajuste, mudança de sessão, texto, imagens ou funcionalidades será cobrado à parte, de acordo com a complexidade do serviço solicitado.",
+      "A mensalidade abrange a integridade, segurança e disponibilidade da página. Alterações de conteúdo ou layout, ajustes, mudança de sessão, texto, imagens ou funcionalidades será elaborado o orçamento de acordo com a complexidade do serviço solicitado.",
   },
   {
     question: "Qual a forma de pagamento?",
@@ -31,7 +31,7 @@ const faqData: FAQItem[] = [
   {
     question: "Os planos possuem fidelidade?",
     answer:
-      "Não Nossos planos não possuem fidelidade. Você pode cancelar a qualquer momento, sem multa e sem taxa de cancelamento. A única cobrança fixa é a taxa de implantação, paga uma única vez no início do serviço.",
+      "Não. Você pode cancelar a qualquer momento, sem multa e sem taxa de cancelamento. A única cobrança fixa é a taxa de implantação, paga uma única vez no início do serviço.",
   },
 ];
 
@@ -133,7 +133,7 @@ export function Faq() {
           </p>
           <button
             onClick={() => {
-              const phoneNumber = "5567993498440";
+              const phoneNumber = "5567981377755";
               const message = encodeURIComponent("Olá! Gostaria de tirar algumas dúvidas sobre os serviços da LandingStudio.");
               const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
               window.open(whatsappUrl, '_blank');

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageSquare, Check, Sparkles, Star, Lock } from "lucide-react";
+import { MessageSquare, Check, Sparkles, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type BillingCycle = "monthly" | "yearly";
@@ -91,6 +91,14 @@ export function Pricing() {
   ];
 
   const selectedPlan = plans.find((p) => p.id === selectedPlanId) || plans[1];
+  const isYearlyBilling = billingCycle === "yearly";
+  const setupFeeWithDiscount = isYearlyBilling
+    ? selectedPlan.setupFee * 0.8
+    : selectedPlan.setupFee;
+  const billingAmount = isYearlyBilling
+    ? selectedPlan.monthlyFee * 10
+    : selectedPlan.monthlyFee;
+  const grandTotal = setupFeeWithDiscount + (isYearlyBilling ? billingAmount : 0);
 
   const handleWhatsAppClick = () => {
     const isYearly = billingCycle === "yearly";
@@ -180,6 +188,9 @@ export function Pricing() {
                 <span className="absolute -top-4 -right-4 bg-gradient-to-r from-green-500 to-emerald-400 text-white text-[10px] px-2.5 py-1 rounded-full border border-green-300/50 font-bold whitespace-nowrap shadow-[0_0_15px_rgba(34,197,94,0.4)] animate-bounce">
                   2 MESES OFF
                 </span>
+                <span className="absolute -bottom-6 -right-4 bg-gradient-to-r from-sky-500 to-blue-500 text-white text-[10px] px-2.5 py-1 rounded-full border border-sky-300/50 font-bold whitespace-nowrap shadow-[0_0_15px_rgba(59,130,246,0.4)] animate-bounce">
+                  20% OFF NA IMPLANTAÇÃO
+                </span>
               </button>
             </div>
           </div>
@@ -193,6 +204,12 @@ export function Pricing() {
               {plans.map((plan) => {
                 const isSelected = selectedPlanId === plan.id;
                 const isYearly = billingCycle === "yearly";
+                const cardSetupFeeWithDiscount = isYearly
+                  ? plan.setupFee * 0.8
+                  : plan.setupFee;
+                const cardBillingAmount = isYearly
+                  ? plan.monthlyFee * 10
+                  : plan.monthlyFee;
 
                 return (
                   <button
@@ -253,20 +270,26 @@ export function Pricing() {
                           <span className="text-[11px] text-white/50 uppercase tracking-widest font-semibold mb-1">
                             Implantação
                           </span>
-
+                          {isYearly ? (
+                            <div className="flex flex-col gap-0.5">
+                              <span className="text-sm text-white/40 line-through">
+                                R$ {plan.setupFee.toLocaleString("pt-BR")}
+                              </span>
+                              <span className="font-bold text-sky-400">
+                                R$ {cardSetupFeeWithDiscount.toLocaleString("pt-BR")}
+                              </span>
+                            </div>
+                          ) : (
                             <span className="font-bold text-white">
-                              R$ {plan.setupFee}
+                              R$ {plan.setupFee.toLocaleString("pt-BR")}
                             </span>
-
+                          )}
                         </div>
 
                         <div className="flex flex-col">
                           <span className="text-[11px] text-white/50 uppercase tracking-widest font-semibold mb-1">
-                            Mensalidade
+                            {isYearly ? "Valor Anual" : "Mensalidade"}
                           </span>
-
-                            <span className="font-bold text-white"></span>
-
                           <div className="flex items-baseline gap-1">
                             <span className="text-sm text-white/50">R$</span>
                             <span
@@ -275,7 +298,7 @@ export function Pricing() {
                                 isSelected ? "text-primary" : "text-white",
                               )}
                             >
-                              {Math.floor(plan.monthlyFee)}
+                              {Math.floor(cardBillingAmount)}
                             </span>
                             <div className="flex flex-col justify-end">
                               <span
@@ -284,12 +307,14 @@ export function Pricing() {
                                   isSelected ? "text-primary" : "text-white",
                                 )}
                               >
-                                ,{(plan.monthlyFee % 1).toFixed(2).substring(2)}
+                                ,{(cardBillingAmount % 1).toFixed(2).substring(2)}
                               </span>
                             </div>
-                            <span className="text-xs text-white/40 ml-1">
-                              /mês
-                            </span>
+                            {!isYearly && (
+                              <span className="text-xs text-white/40 ml-1">
+                                /mês
+                              </span>
+                            )}
                           </div>
                         </div>
 
@@ -345,8 +370,6 @@ export function Pricing() {
 
               <div className="flex flex-col gap-3">
                 {serviceDetails.map((item, idx) => {
-                  const isMandatory = item.mandatory;
-
                   return (
                     <div
                       key={idx}
@@ -359,14 +382,10 @@ export function Pricing() {
                       <div
                         className={cn(
                           "w-6 h-6 rounded-[6px] flex items-center justify-center flex-shrink-0 transition-all",
-                          isMandatory
-                            ? "border border-[#D4AF37] text-[#D4AF37]"
-                            : "border border-white/20 bg-transparent text-transparent",
+                          "border border-white/20 bg-transparent text-transparent",
                         )}
                       >
-                        {isMandatory ? (
-                          <Lock className="w-[14px] h-[14px]" />
-                        ) : null}
+                        {/* Ícone removido por não haver mais itens obrigatórios */}
                       </div>
 
                       {/* Texts */}
@@ -375,11 +394,6 @@ export function Pricing() {
                           <h4 className="font-bold text-[16px] text-white tracking-wide">
                             {item.title}
                           </h4>
-                          {isMandatory && (
-                            <span className="text-[10px] bg-[#D4AF37]/10 text-[#D4AF37] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
-                              OBRIGATÓRIO
-                            </span>
-                          )}
                         </div>
                         <p className="text-[14px] text-white/50 font-medium">
                           {item.description}
@@ -438,10 +452,12 @@ export function Pricing() {
                   <div className="space-y-5">
                     <div className="flex justify-between items-center">
                       <div className="text-sm text-white/50">
-                        Implantação Estimada
+                        {isYearlyBilling
+                          ? "Implantação (com 20% OFF)"
+                          : "Implantação Estimada"}
                       </div>
                       <div className="text-lg font-bold text-white text-right">
-                        R$ {selectedPlan.setupFee.toLocaleString("pt-BR")}
+                        R$ {setupFeeWithDiscount.toLocaleString("pt-BR")}
                       </div>
                     </div>
 
@@ -449,26 +465,38 @@ export function Pricing() {
 
                     <div className="flex justify-between items-center">
                       <div className="text-sm text-white/50">
-                        Mensalidade Estimada
+                        {isYearlyBilling ? "Valor Anual" : "Mensalidade Estimada"}
                       </div>
                       <div className="text-2xl font-bold text-white flex items-baseline gap-1 text-right">
                         R${" "}
-                        {selectedPlan.monthlyFee.toLocaleString("pt-BR", {
+                        {billingAmount.toLocaleString("pt-BR", {
                           minimumFractionDigits: 2,
                         })}
-                        <span className="text-xs text-white/40 font-normal">
-                          /mês
-                        </span>
+                        {!isYearlyBilling && (
+                          <span className="text-xs text-white/40 font-normal">
+                            /mês
+                          </span>
+                        )}
                       </div>
                     </div>
+
+                    {isYearlyBilling && (
+                      <>
+                        <div className="w-full h-px bg-white/5" />
+                        <div className="flex justify-between items-center">
+                          <div className="text-sm text-white/50">
+                            Total (implantação + anual)
+                          </div>
+                          <div className="text-xl font-bold text-white text-right">
+                            R$ {grandTotal.toLocaleString("pt-BR", {
+                              minimumFractionDigits: 2,
+                            })}
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
 
-                  {billingCycle === "yearly" && (
-                    <div className="mt-6 bg-green-500/10 border border-green-500/20 text-green-400 p-3 rounded-xl text-xs font-medium leading-relaxed text-center">
-                      Plano anual com 2 meses isentos (pague
-                      apenas 10 meses).
-                    </div>
-                  )}
                 </div>
 
                 <button
