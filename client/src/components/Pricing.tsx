@@ -32,13 +32,13 @@ export function Pricing() {
         "Domínio e Hospedagem",
       ],
       yearlyBadge: "2 Meses Isentos",
-      yearlyText: "Plano anual com 2 primeiros meses sem mensalidade.",
+      yearlyText: "Paga apenas 10 meses.",
     },
     {
       id: "profissional",
       title: "Plano Profissional",
       setupFee: 500,
-      monthlyFee: 139.9,
+      monthlyFee: 99.9,
       popular: true,
       features: [
         "Landing Page Premium",
@@ -47,13 +47,13 @@ export function Pricing() {
         "Domínio e Hospedagem",
       ],
       yearlyBadge: "Melhor Custo-Benefício",
-      yearlyText: "Plano anual com 2 primeiros meses sem mensalidade.",
+      yearlyText: "Paga apenas 10 meses.",
     },
     {
       id: "painel",
-      title: "Profissional + Painel Administrativo",
+      title: "Plano Master",
       setupFee: 600,
-      monthlyFee: 189.9,
+      monthlyFee: 169.9,
       features: [
         "Landing Page Premium",
         "Copywriting Completo",
@@ -62,14 +62,14 @@ export function Pricing() {
         "Painel Administrativo",
       ],
       yearlyBadge: "2 Meses Isentos",
-      yearlyText: "Plano anual com 2 primeiros meses sem mensalidade.",
+      yearlyText: "Paga apenas 10 meses.",
     },
   ];
 
   const serviceDetails = [
     {
       title: "Landing Page Premium",
-      description: "Estrutura + Design + Responsivo",
+      description: "Estrutura + Design + Funciona em qualquer tela (celular, tablet e PC)",
     },
     {
       title: "Copywriting Completo",
@@ -100,10 +100,10 @@ export function Pricing() {
     });
 
     let message = `Olá! Gostaria de um orçamento para o *${planName}*.\n\n`;
-    message += `*Implantação:* a partir de R$ ${selectedPlan.setupFee.toLocaleString("pt-BR")}\n`;
-    message += `*Mensalidade:* a partir de R$ ${monthlyFormatted}/mês\n\n`;
+    message += `*Implantação:* R$ ${selectedPlan.setupFee.toLocaleString("pt-BR")}\n`;
+    message += `*Mensalidade:* R$ ${monthlyFormatted}/mês\n\n`;
     if (isYearly) {
-      message += `*Condição Anual:* 2 primeiros meses isentos (paga 10 de 12)\n\n`;
+      message += `*Condição Anual:* 2 meses isentos (paga 10 de 12)\n\n`;
     }
 
     message += `Itens inclusos:\n`;
@@ -114,7 +114,7 @@ export function Pricing() {
       message += `• ${selectedPlan.highlightFeature}\n`;
     }
 
-    const url = `https://wa.me/5567993498440?text=${encodeURIComponent(message)}`;
+    const url = `https://wa.me/5567981377755?text=${encodeURIComponent(message)}`;
 
     if (typeof window.gtag_report_conversion === "function") {
       window.gtag_report_conversion(url);
@@ -253,22 +253,20 @@ export function Pricing() {
                           <span className="text-[11px] text-white/50 uppercase tracking-widest font-semibold mb-1">
                             Implantação
                           </span>
-                          <span className="text-sm font-medium text-white/80">
-                            a partir de{" "}
+
                             <span className="font-bold text-white">
                               R$ {plan.setupFee}
                             </span>
-                          </span>
+
                         </div>
 
                         <div className="flex flex-col">
                           <span className="text-[11px] text-white/50 uppercase tracking-widest font-semibold mb-1">
                             Mensalidade
                           </span>
-                          <span className="text-sm font-medium text-white/80">
-                            a partir de{" "}
+
                             <span className="font-bold text-white"></span>
-                          </span>
+
                           <div className="flex items-baseline gap-1">
                             <span className="text-sm text-white/50">R$</span>
                             <span
@@ -467,7 +465,7 @@ export function Pricing() {
 
                   {billingCycle === "yearly" && (
                     <div className="mt-6 bg-green-500/10 border border-green-500/20 text-green-400 p-3 rounded-xl text-xs font-medium leading-relaxed text-center">
-                      Plano anual com 2 primeiros meses sem mensalidade (paga
+                      Plano anual com 2 meses isentos (pague
                       apenas 10 meses).
                     </div>
                   )}
@@ -479,10 +477,6 @@ export function Pricing() {
                 >
                   Solicitar Orçamento <MessageSquare className="w-6 h-6" />
                 </button>
-                <p className="text-center text-[11px] text-white/30 mt-4 leading-relaxed px-4">
-                  Valores estimados. O orçamento final será enviado após análise
-                  do projeto.
-                </p>
               </div>
             </div>
           </div>

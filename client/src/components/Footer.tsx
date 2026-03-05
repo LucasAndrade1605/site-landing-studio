@@ -28,13 +28,13 @@ export function Footer() {
           <div className="md:col-span-3 space-y-6">
             <h4 className="text-white font-semibold">Contato</h4>
             <a
-              href="https://wa.me/5567993498440"
+              href="https://wa.me/5567981377755"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/60 hover:text-primary transition-colors flex items-center gap-2"
             >
               <Phone className="w-5 h-5" />
-              (67) 9 9349-8440
+              (67) 9 8137-7755
             </a>
             <a
               href="mailto:contato@landingpage.com.br"

@@ -11,27 +11,27 @@ const faqData: FAQItem[] = [
   {
     question: "Quanto tempo leva para criar uma landing page?",
     answer:
-      "O prazo médio é de 5 a 12 dias úteis, dependendo da complexidade do projeto e do nível de personalização desejado. Projetos mais simples podem ser entregues em até 3 dias.",
+      "Dependendo da complexidade do projeto e do nível de personalização desejado. Projetos mais simples podem ser entregues em até 5 dias úteis.",
   },
   {
     question: "Vocês fazem a hospedagem da página?",
     answer:
-      "Sim! Oferecemos hospedagem com certificado SSL R$ 55,00/mês. Você também pode optar por hospedar em sua própria infraestrutura.",
+    "Sim! Nós cuidamos de tudo para você: domínio, hospedagem e certificado SSL, tudo incluso na mensalidade.",
   },
   {
     question: "Posso solicitar alterações após a entrega?",
     answer:
-      "Claro! Todos os nossos planos incluem revisões. Após a entrega, você tem um período de suporte de 5 dias corridos para pequenos ajustes conforme necessário.",
+      "A mensalidade abrange a integridade, segurança e disponibilidade da página. Não inclui alterações de conteúdo ou layout. Qualquer ajuste, mudança de sessão, texto, imagens ou funcionalidades será cobrado à parte, de acordo com a complexidade do serviço solicitado.",
   },
   {
     question: "Qual a forma de pagamento?",
     answer:
-      "Aceitamos PIX e cartão de crédito, com possibilidade de parcelamento em até 12x, com juros. O pagamento é realizado em duas etapas: 50% no início do desenvolvimento e 50% na entrega do projeto.",
+      "Aceitamos PIX e cartão de crédito para o pagamento da taxa de implantação e de planos anuais, com possibilidade de parcelamento em até 12x, com juros. Para o pagamento da mensalidade recorrente, a forma de pagamento disponível é apenas via PIX.",
   },
   {
-    question: "E se eu não gostar do resultado?",
+    question: "Os planos possuem fidelidade?",
     answer:
-      "Trabalhamos com revisões ilimitadas até sua aprovação final. Nosso objetivo é sua satisfação total. Caso não fique satisfeito, reembolsamos 50% do valor do pagamento inicial.",
+      "Não Nossos planos não possuem fidelidade. Você pode cancelar a qualquer momento, sem multa e sem taxa de cancelamento. A única cobrança fixa é a taxa de implantação, paga uma única vez no início do serviço.",
   },
 ];
 
